@@ -30,4 +30,3 @@ class UserWithPw(BaseModel):
     id: int
     username: str
     password: str
-    
