@@ -2,6 +2,7 @@
 
 ## Team Members
 * Hasan Hamdan
+* Cosimo Blodgett
 
 ## Getting started
 
