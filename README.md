@@ -3,6 +3,7 @@
 ## Team Members
 * Hasan Hamdan
 * Cosimo Blodgett
+* James Skinner
 
 ## Getting started
 
