@@ -4,6 +4,7 @@
 * Hasan Hamdan
 * Cosimo Blodgett
 * James Skinner
+* Mark McTague
 
 ## Getting started
 
