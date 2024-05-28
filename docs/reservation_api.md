@@ -1,7 +1,7 @@
 
 ### Get list of pools
 
-* Endpoint path: /api/pools
+* Endpoint path: /api/pools/{pool_id}/reservations
 * Endpoint method: GET
 
 * Headers:
@@ -11,19 +11,110 @@
 * Response shape (JSON):
     ```json
     {
-      "pools": [
+      "reservations": [
         {
           "id": int,
-          "hourly_rate": int,
-          "pic_url": str,
-          "restroom": default=false boolean,
-          "pariking": default=false boolean,
-          "heated": default=false boolean,
-          "ada_complient": default=false boolean,
-          "alcohol": default=false boolean,
-          "description": text,
-          "username": email
+          "first_name": string,
+          "last_name": string,
+          "date": date,
+          "start_time": datetime,
+          "end_time": datetime,
+          "pool": {
+            "id": int
+          }
         }
       ]
     }
+    ```
+
+### Get a single reservation
+
+* Endpoint path: /api/pools/{pool_id}/reservations/<id>
+* Endpoint method: GET
+
+* Headers:
+  * Authorization: Bearer token
+
+  * Request shape (JSON):
+    ```json
+      {
+        "id": int
+      }
+    ```
+
+* Response: A list of Pools
+* Response shape (JSON):
+    ```json
+      {
+        "id": int,
+        "first_name": string,
+        "last_name": string,
+        "date": date,
+        "start_time": datetime,
+        "end_time": datetime,
+        "pool": {
+          "id": int
+        }
+      }
+    ```
+
+### Post a single reservation
+
+* Endpoint path: /api/pools/{pool_id}/reservations
+* Endpoint method: GET
+
+* Headers:
+  * Authorization: Bearer token
+
+  * Request shape (JSON):
+    ```json
+      {
+        "first_name": string,
+        "last_name": string,
+        "date": date,
+        "start_time": datetime,
+        "end_time": datetime,
+        "pool": {
+          "id": int
+        }
+      }
+    ```
+
+* Response: A list of Pools
+* Response shape (JSON):
+    ```json
+      {
+        "id": int,
+        "first_name": string,
+        "last_name": string,
+        "date": date,
+        "start_time": datetime,
+        "end_time": datetime,
+        "pool": {
+          "id": int
+        }
+      }
+    ```
+
+### Delete a single reservation
+
+* Endpoint path: /api/pools/{pool_id}/reservations/<id>
+* Endpoint method: GET
+
+* Headers:
+  * Authorization: Bearer token
+
+  * Request shape (JSON):
+    ```json
+      {
+        "id": int
+      }
+    ```
+
+* Response: A list of Pools
+* Response shape (JSON):
+    ```json
+      {
+        "success": boolean
+      }
     ```
