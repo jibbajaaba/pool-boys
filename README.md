@@ -1,5 +1,10 @@
 # Module3 Project Gamma
 
+## Team Members
+* Hasan Hamdan
+* Cosimo Blodgett
+* James Skinner
+
 ## Getting started
 
 You have a project repository, now what? The next section
