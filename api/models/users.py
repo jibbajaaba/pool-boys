@@ -11,6 +11,11 @@ class UserRequest(BaseModel):
 
     username: str
     password: str
+    first_name: str
+    last_name: str
+    email: str
+    phone_number: str
+    age: int
 
 
 class UserResponse(BaseModel):
