@@ -8,21 +8,21 @@ class PoolIn(BaseModel):
 
     picture_url: str
     address: str
-    days_available: str
+    dates_available: str
     description: str
     hourly_rate: int
     number_guests: int
     poolowner_id: int
 
 
-class PoolOut(BaseModel):
+class PoolOut(PoolIn):
     """
     Get a pool
     """
     id: int
     picture_url: str
     address: str
-    days_available: str
+    dates_available: str
     description: str
     hourly_rate: int
     number_guests: int

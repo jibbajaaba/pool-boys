@@ -6,7 +6,8 @@ import os
 import psycopg
 from psycopg_pool import ConnectionPool
 from psycopg.rows import class_row
-from models.users import UserWithPw, UserRequest
+# from typing import Optional
+from models.pools import PoolIn, PoolOut
 from utils.exceptions import UserDatabaseException
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
@@ -17,30 +18,24 @@ pool = ConnectionPool(DATABASE_URL)
 
 
 class PoolQueries:
-
     def create_pool(
         self,
-        new_user: UserRequest,
-        hashed_password: str,
-    ) -> UserWithPw:
-        """
-        Creates a new user in the database
-
-        Raises a UserInsertionException if creating the user fails
-        """
+        new_pool: PoolIn,
+        user_id: int,
+    ) -> PoolOut:
         try:
             with pool.connection() as conn:
-                with conn.cursor(row_factory=class_row(UserWithPw)) as cur:
+                with conn.cursor(row_factory=class_row(PoolOut)) as cur:
                     cur.execute(
                         """
-                        INSERT INTO users (
-                            username,
-                            password,
-                            first_name,
-                            last_name,
-                            email,
-                            phone_number,
-                            age
+                        INSERT INTO pools (
+                            picture_url,
+                            address,
+                            dates_available,
+                            description,
+                            hourly_rate,
+                            number_guests,
+                            poolowner_id
 
                         ) VALUES (
                             %s, %s, %s, %s, %s, %s, %s
@@ -48,23 +43,23 @@ class PoolQueries:
                         RETURNING *;
                         """,
                         [
-                            new_user.username,
-                            hashed_password,
-                            new_user.first_name,
-                            new_user.last_name,
-                            new_user.email,
-                            new_user.phone_number,
-                            new_user.age,
+                            new_pool.picture_url,
+                            new_pool.address,
+                            new_pool.dates_available,
+                            new_pool.description,
+                            new_pool.hourly_rate,
+                            new_pool.number_guests,
+                            new_pool.poolowner_id
+                            
                         ],
                     )
-                    user = cur.fetchone()
-                    if not user:
+                    pools = cur.fetchone()
+                    if not pools:
                         raise UserDatabaseException(
-                            f"Could not create user \
-                            with username{new_user.username}"
+                            "Could not create pool"
                         )
         except psycopg.Error:
             raise UserDatabaseException(
-                f"Could not create user with username {new_user.username}"
+                "Could not create pool"
             )
-        return user
+        return pools

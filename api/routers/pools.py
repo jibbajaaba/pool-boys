@@ -3,6 +3,8 @@ from fastapi import Depends, APIRouter, HTTPException
 from models.pools import PoolIn
 from models.users import UserResponse
 from utils.authentication import try_get_jwt_user_data
+from queries.pools_queries import PoolQueries
+
 
 router = APIRouter()
 
@@ -11,8 +13,10 @@ router = APIRouter()
 def create_pools(
     new_pool: PoolIn,
     user: UserResponse = Depends(try_get_jwt_user_data),
+    queries: PoolQueries = Depends()
 ):
     if not user:
         raise HTTPException(
             status_code=401, detail="Must be logged in to create pool"
             )
+    return queries.create_pool(new_pool=new_pool, user_id=user.id)
