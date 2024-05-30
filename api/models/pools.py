@@ -14,6 +14,7 @@ class PoolIn(BaseModel):
     number_guests: int
     poolowner_id: int
 
+
 class PoolOut(BaseModel):
     """
     Get a pool
