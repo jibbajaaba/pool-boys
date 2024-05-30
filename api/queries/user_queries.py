@@ -1,6 +1,7 @@
 """
 Database Queries for Users
 """
+
 import os
 import psycopg
 from psycopg_pool import ConnectionPool
@@ -80,10 +81,10 @@ class UserQueries:
         return user
 
     def create_user(
-            self,
-            new_user: UserRequest,
-            hashed_password: str,
-            ) -> UserWithPw:
+        self,
+        new_user: UserRequest,
+        hashed_password: str,
+    ) -> UserWithPw:
         """
         Creates a new user in the database
 
@@ -115,13 +116,14 @@ class UserQueries:
                             new_user.last_name,
                             new_user.email,
                             new_user.phone_number,
-                            new_user.age
+                            new_user.age,
                         ],
                     )
                     user = cur.fetchone()
                     if not user:
                         raise UserDatabaseException(
-                            f"Could not create user with username {new_user.username}"
+                            f"Could not create user \
+                            with username{new_user.username}"
                         )
         except psycopg.Error:
             raise UserDatabaseException(
