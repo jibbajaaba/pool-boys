@@ -14,7 +14,7 @@ from queries.user_queries import (
 )
 
 from utils.exceptions import UserDatabaseException
-from models.users import UserRequest, UserResponse, UserLogin
+from models.users import UserRequest, UserResponse, UserLogin, UserDetail
 
 from utils.authentication import (
     try_get_jwt_user_data,
@@ -116,7 +116,8 @@ async def signin(
 @router.get("/authenticate")
 async def authenticate(
     user: UserResponse = Depends(try_get_jwt_user_data),
-) -> UserResponse:
+    queries: UserQueries = Depends(),
+) -> UserDetail:
     """
     This function returns the user if the user is logged in.
 
@@ -132,7 +133,8 @@ async def authenticate(
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Not logged in"
         )
-    return user
+    user_details = queries.get_by_id(user.id)
+    return user_details
 
 
 @router.delete("/signout")

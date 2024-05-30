@@ -34,11 +34,22 @@ class UserResponse(BaseModel):
 
     id: int
     username: str
+
+
+class UserDetail(BaseModel):
+    """
+    Represents a the parameters needed to create a new user
+    """
+
+    id: int
+    username: str
+    password: str
     first_name: str
     last_name: str
     email: str
     phone_number: str
     age: int
+
 
 
 class UserWithPw(BaseModel):
