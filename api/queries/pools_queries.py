@@ -36,7 +36,6 @@ class PoolQueries:
                             hourly_rate,
                             number_guests,
                             poolowner_id
-
                         ) VALUES (
                             %s, %s, %s, %s, %s, %s, %s
                         )
@@ -49,11 +48,11 @@ class PoolQueries:
                             new_pool.description,
                             new_pool.hourly_rate,
                             new_pool.number_guests,
-                            new_pool.poolowner_id
-                            
+                            user_id
                         ],
                     )
                     pools = cur.fetchone()
+                    print("CONTENT:::::::::::", pools)
                     if not pools:
                         raise UserDatabaseException(
                             "Could not create pool"
