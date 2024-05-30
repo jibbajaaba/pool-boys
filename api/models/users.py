@@ -51,7 +51,6 @@ class UserDetail(BaseModel):
     age: int
 
 
-
 class UserWithPw(BaseModel):
     """
     Represents a user with password included
