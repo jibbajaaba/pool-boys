@@ -20,3 +20,4 @@ class PoolOut(PoolIn):
     """
     id: int
     poolowner_id: int
+
