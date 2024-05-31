@@ -19,4 +19,4 @@ def create_pools(
         raise HTTPException(
             status_code=401, detail="Must be logged in to create pool"
             )
-    return queries.create_pool(new_pool=new_pool, user_id=user.id)
+    return queries.create_pool(new_pool=new_pool, poolowner_id=user.id)

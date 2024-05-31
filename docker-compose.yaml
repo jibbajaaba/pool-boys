@@ -2,6 +2,8 @@ volumes:
     database_volume:
         name: database_volume
         external: true
+    pg-admin:
+        external: true
 
 services:
     db:
@@ -42,3 +44,13 @@ services:
             BASE_URL: http://localhost:5173
         ports:
             - "5173:5173"
+    pg-admin:
+        image: dpage/pgadmin4
+        volumes:
+            - pg-admin:/var/lib/pgadmin
+        ports:
+            - 8082:80
+        environment:
+            PGADMIN_DEFAULT_EMAIL: mmcta275@gmail.com
+            PGADMIN_DEFAULT_PASSWORD: admin
+            PGADMIN_DISABLE_POSTFIX: 1

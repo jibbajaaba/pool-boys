@@ -8,7 +8,7 @@ from psycopg_pool import ConnectionPool
 from psycopg.rows import class_row
 # from typing import Optional
 from models.pools import PoolIn, PoolOut
-from utils.exceptions import UserDatabaseException
+from utils.exceptions import PoolsDatabaseException
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 if not DATABASE_URL:
@@ -21,7 +21,7 @@ class PoolQueries:
     def create_pool(
         self,
         new_pool: PoolIn,
-        user_id: int,
+        poolowner_id: int,
     ) -> PoolOut:
         try:
             with pool.connection() as conn:
@@ -48,17 +48,16 @@ class PoolQueries:
                             new_pool.description,
                             new_pool.hourly_rate,
                             new_pool.number_guests,
-                            user_id
+                            poolowner_id
                         ],
                     )
                     pools = cur.fetchone()
-                    print("CONTENT:::::::::::", pools)
                     if not pools:
-                        raise UserDatabaseException(
+                        raise PoolsDatabaseException(
                             "Could not create pool"
                         )
         except psycopg.Error:
-            raise UserDatabaseException(
+            raise PoolsDatabaseException(
                 "Could not create pool"
             )
         return pools
