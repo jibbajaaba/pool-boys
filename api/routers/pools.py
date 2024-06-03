@@ -1,6 +1,6 @@
 
 from fastapi import Depends, APIRouter, HTTPException
-from models.pools import PoolIn
+from models.pools import PoolIn, PoolOut
 from models.users import UserResponse
 from utils.authentication import try_get_jwt_user_data
 from queries.pools_queries import PoolQueries
@@ -51,3 +51,23 @@ def delete_pool(
     return {
         "success": queries.delete_pool(pool_id=pool_id, poolowner_id=user.id)
     }
+
+
+@router.put("/api/pools/{pool_id}", response_model=PoolOut)
+def update_pool(
+    pool_id: int,
+    pool_data: PoolIn,
+    user: UserResponse = Depends(try_get_jwt_user_data),
+    queries: PoolQueries = Depends()
+):
+    try:
+        updated_pool = queries.update_pool(
+            pool_id=pool_id,
+            pools=pool_data,
+            poolowner_id=user.id
+        )
+        if not updated_pool:
+            raise HTTPException(status_code=404)
+        return updated_pool
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))

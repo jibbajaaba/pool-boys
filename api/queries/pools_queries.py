@@ -7,7 +7,7 @@ import psycopg
 from psycopg_pool import ConnectionPool
 from psycopg.rows import class_row
 from typing import Optional
-from models.pools import PoolIn, PoolOut
+from models.pools import PoolIn, PoolOut, PoolUpdate
 from utils.exceptions import PoolsDatabaseException
 from utils.exceptions import UserDatabaseException
 
@@ -114,3 +114,44 @@ class PoolQueries:
         except psycopg.Error:
             raise PoolsDatabaseException(
                 "Could not delete pool")
+
+    def update_pool(
+            self,
+            pool_id: int,
+            pools: PoolIn,
+            poolowner_id: int
+    ) -> PoolUpdate:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        UPDATE pools
+                        SET picture_url = %s,
+                            address = %s,
+                            dates_available = %s,
+                            description = %s,
+                            hourly_rate = %s,
+                            number_guests = %s
+                        WHERE id = %s AND poolowner_id = %s
+                        """,
+                        [
+                            pools.picture_url,
+                            pools.address,
+                            pools.dates_available,
+                            pools.description,
+                            pools.hourly_rate,
+                            pools.number_guests,
+                            pool_id,
+                            poolowner_id
+                        ]
+                    )
+                if cur.rowcount == 0:
+                    return False
+                pool_dict = pools.dict()
+                return PoolUpdate(
+                    id=pool_id,
+                    poolowner_id=poolowner_id,
+                    **pool_dict)
+        except psycopg.Error:
+            raise PoolsDatabaseException("Could not update pool")
