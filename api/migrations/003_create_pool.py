@@ -6,7 +6,6 @@ steps = [
             id SERIAL PRIMARY KEY NOT NULL,
             picture_url VARCHAR(255) NOT NULL,
             address TEXT NOT NULL,
-            dates_available TEXT NOT NULL,
             description TEXT NOT NULL,
             hourly_rate INT NOT NULL,
             number_guests INT NOT NULL,

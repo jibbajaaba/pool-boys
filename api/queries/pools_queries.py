@@ -32,7 +32,6 @@ class PoolQueries:
                         INSERT INTO pools (
                             picture_url,
                             address,
-                            dates_available,
                             description,
                             hourly_rate,
                             number_guests,
@@ -45,7 +44,6 @@ class PoolQueries:
                         [
                             new_pool.picture_url,
                             new_pool.address,
-                            new_pool.dates_available,
                             new_pool.description,
                             new_pool.hourly_rate,
                             new_pool.number_guests,
@@ -129,7 +127,6 @@ class PoolQueries:
                         UPDATE pools
                         SET picture_url = %s,
                             address = %s,
-                            dates_available = %s,
                             description = %s,
                             hourly_rate = %s,
                             number_guests = %s
@@ -138,7 +135,6 @@ class PoolQueries:
                         [
                             pools.picture_url,
                             pools.address,
-                            pools.dates_available,
                             pools.description,
                             pools.hourly_rate,
                             pools.number_guests,

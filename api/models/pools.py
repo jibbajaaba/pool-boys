@@ -8,7 +8,6 @@ class PoolIn(BaseModel):
 
     picture_url: str
     address: str
-    dates_available: str
     description: str
     hourly_rate: int
     number_guests: int
@@ -27,7 +26,6 @@ class PoolUpdate(BaseModel):
     poolowner_id: int
     picture_url: str
     address: str
-    dates_available: str
     description: str
     hourly_rate: int
     number_guests: int
