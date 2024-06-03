@@ -37,7 +37,7 @@ class PoolQueries:
                             number_guests,
                             poolowner_id
                         ) VALUES (
-                            %s, %s, %s, %s, %s, %s, %s
+                            %s, %s, %s, %s, %s, %s
                         )
                         RETURNING *;
                         """,
