@@ -7,7 +7,7 @@ import psycopg
 from psycopg_pool import ConnectionPool
 from psycopg.rows import class_row
 from typing import Optional
-from models.pools import PoolIn, PoolOut, PoolUpdate, GetPools
+from models.pools import PoolIn, PoolOut, PoolUpdate
 from utils.exceptions import PoolsDatabaseException
 from utils.exceptions import UserDatabaseException
 
@@ -26,7 +26,7 @@ class PoolQueries:
         """
         try:
             with pool.connection() as conn:
-                with conn.cursor(row_factory=class_row(GetPools)) as cur:
+                with conn.cursor(row_factory=class_row(PoolOut)) as cur:
                     cur.execute("SELECT * FROM pools;")
                     return cur.fetchall()
         except psycopg.Error as e:

@@ -10,9 +10,10 @@ class PoolIn(BaseModel):
     description: str
     hourly_rate: int
     number_guests: int
+    amenities_ids: list[int]
 
 
-class PoolOut(PoolIn):
+class PoolOutWithAmenityIds(PoolIn):
     """
     Get a pool
     """
@@ -20,7 +21,10 @@ class PoolOut(PoolIn):
     poolowner_id: int
 
 
-class PoolUpdate(BaseModel):
+class PoolOut(BaseModel):
+    """
+    Get a pool
+    """
     id: int
     poolowner_id: int
     picture_url: str
@@ -30,10 +34,7 @@ class PoolUpdate(BaseModel):
     number_guests: int
 
 
-class GetPools(BaseModel):
-    """
-    Get a pool
-    """
+class PoolUpdate(BaseModel):
     id: int
     poolowner_id: int
     picture_url: str
