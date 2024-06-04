@@ -5,7 +5,6 @@ class PoolIn(BaseModel):
     """
     Creates a pool.
     """
-
     picture_url: str
     address: str
     description: str
@@ -21,7 +20,6 @@ class PoolOut(PoolIn):
     poolowner_id: int
 
 
-
 class PoolUpdate(BaseModel):
     id: int
     poolowner_id: int
@@ -30,6 +28,7 @@ class PoolUpdate(BaseModel):
     description: str
     hourly_rate: int
     number_guests: int
+
 
 class GetPools(BaseModel):
     """

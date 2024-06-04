@@ -6,7 +6,7 @@ import os
 import psycopg
 from psycopg_pool import ConnectionPool
 from psycopg.rows import class_row
-from typing import Optional, List
+from typing import Optional
 from models.pools import PoolIn, PoolOut, PoolUpdate, GetPools
 from utils.exceptions import PoolsDatabaseException
 from utils.exceptions import UserDatabaseException
@@ -20,18 +20,18 @@ pool = ConnectionPool(DATABASE_URL)
 
 class PoolQueries:
     def get_all_pools(self):
-            """
-            Fetches all pools from the database and returns them as an iterable of PoolOut objects.
-            """
-            try:
-                with pool.connection() as conn:
-                    with conn.cursor(row_factory=class_row(GetPools)) as cur:
-                        cur.execute("SELECT * FROM pools;")
-                        return cur.fetchall()
-            except psycopg.Error as e:
-                print(e)
-                raise PoolsDatabaseException("Error getting all pools")
-            
+        """
+        Fetches all pools from the database
+        and returns them as an iterable of PoolOut objects.
+        """
+        try:
+            with pool.connection() as conn:
+                with conn.cursor(row_factory=class_row(GetPools)) as cur:
+                    cur.execute("SELECT * FROM pools;")
+                    return cur.fetchall()
+        except psycopg.Error as e:
+            print(e)
+            raise PoolsDatabaseException("Error getting all pools")
 
     def create_pool(
         self,
