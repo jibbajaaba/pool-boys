@@ -2,8 +2,8 @@ import os
 import psycopg
 from psycopg_pool import ConnectionPool
 from psycopg.rows import class_row
-from models.amenity import AmenityOut
-from utils.exceptions import PoolsDatabaseException
+from models.amenity import AmenityOut, AmenityIn
+from utils.exceptions import PoolsDatabaseException, AmenitiesDatabaseException
 
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
@@ -14,10 +14,30 @@ pool = ConnectionPool(DATABASE_URL)
 
 
 class AmenitiesQueries:
-    def get_by_id(self, id: int):
-        pass
-    # return amenity out given an id
-    # need pydantic model
+    def get_amenities_id(
+            self,
+            id: int
+            ):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor(row_factory=class_row(AmenityOut)) as cur:
+                    cur.execute(
+                        """
+                            SELECT
+                                *
+                            FROM amenities
+                            WHERE id = %s
+                            """,
+                        [id],
+                    )
+                    amenities = cur.fetchone()
+                    print(amenities, "!!!!!!!!!!!")
+                    if not amenities:
+                        return None
+                    return amenities
+        except psycopg.Error as e:
+            print(e)
+            raise AmenitiesDatabaseException("Error getting amenity")
 
     def get_all(self):
         try:

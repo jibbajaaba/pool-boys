@@ -4,6 +4,7 @@ from models.pools import PoolIn, PoolOut
 from models.users import UserResponse
 from utils.authentication import try_get_jwt_user_data
 from queries.pools_queries import PoolQueries
+from queries.amenity_queries import AmenitiesQueries
 
 
 router = APIRouter()
@@ -13,13 +14,19 @@ router = APIRouter()
 def create_pools(
     new_pool: PoolIn,
     user: UserResponse = Depends(try_get_jwt_user_data),
-    queries: PoolQueries = Depends()
+    queries: PoolQueries = Depends(),
+    amenities_queries: AmenitiesQueries = Depends()
 ):
     if not user:
         raise HTTPException(
             status_code=401, detail="Must be logged in to create pool"
             )
-    return queries.create_pool(new_pool=new_pool, poolowner_id=user.id)
+    for amenity_id in new_pool.amenities_ids:
+        if not amenity_id:
+            raise HTTPException(
+                status_code=404, detail="amenity not found")
+    pool = queries.create_pool(new_pool=new_pool, poolowner_id=user.id)
+    return pool
 
 
 @router.get("/api/pools/{pool_id}")

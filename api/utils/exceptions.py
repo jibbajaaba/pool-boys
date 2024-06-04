@@ -9,3 +9,7 @@ class UserDatabaseException(Exception):
 
 class PoolsDatabaseException(Exception):
     pass
+
+
+class AmenitiesDatabaseException(Exception):
+    pass

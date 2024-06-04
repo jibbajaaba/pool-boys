@@ -77,7 +77,6 @@ class UserQueries:
         except psycopg.Error as e:
             print(e)
             raise UserDatabaseException(f"Error getting user with id {id}")
-
         return user
 
     def create_user(
@@ -103,7 +102,6 @@ class UserQueries:
                             email,
                             phone_number,
                             age
-
                         ) VALUES (
                             %s, %s, %s, %s, %s, %s, %s
                         )
