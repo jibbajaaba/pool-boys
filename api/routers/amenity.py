@@ -13,7 +13,7 @@ def get_all_amenities(
     return amenity_queries.get_all()
 
 
-@router.get("/api/amenities/{id}", response_model=list[AmenityOut])
+@router.get("/api/amenities/{id}", response_model=AmenityOut)
 def get_amenity(
     id: int,
     amenity_queries: AmenitiesQueries = Depends()
