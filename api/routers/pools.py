@@ -1,6 +1,6 @@
 
 from fastapi import Depends, APIRouter, HTTPException
-from models.pools import PoolIn, PoolOut
+from models.pools import PoolIn, PoolOut, GetPools
 from models.users import UserResponse
 from utils.authentication import try_get_jwt_user_data
 from queries.pools_queries import PoolQueries
@@ -71,3 +71,13 @@ def update_pool(
         return updated_pool
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
+
+
+@router.get("/api/pools/", response_model=list[GetPools])
+def get_all_pools(
+    user: UserResponse = Depends(try_get_jwt_user_data),
+    pool_queries: PoolQueries = Depends()
+):
+    if not user:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    return pool_queries.get_all_pools()
