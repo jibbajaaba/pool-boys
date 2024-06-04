@@ -16,8 +16,8 @@ pool = ConnectionPool(DATABASE_URL)
 class AmenitiesQueries:
     def get_by_id(self, id: int):
         pass
-    #return amenity out given an id
-    #need pydantic model
+    # return amenity out given an id
+    # need pydantic model
 
     def get_all(self):
         try:

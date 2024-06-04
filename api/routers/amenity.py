@@ -1,4 +1,4 @@
-from fastapi import Depends, APIRouter, HTTPException
+from fastapi import Depends, APIRouter
 from models.amenity import AmenityOut
 from queries.amenity_queries import AmenitiesQueries
 

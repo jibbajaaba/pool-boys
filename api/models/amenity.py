@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class AmenityIn(BaseModel):
     name: str
 
