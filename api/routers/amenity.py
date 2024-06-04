@@ -9,5 +9,5 @@ router = APIRouter()
 @router.get("/api/amenity", response_model=list[AmenityOut])
 def get_all_amenities(
     amenity_queries: AmenitiesQueries = Depends()
-    ):
+):
     return amenity_queries.get_all()
