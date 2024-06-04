@@ -2,7 +2,7 @@ import os
 import psycopg
 from psycopg_pool import ConnectionPool
 from psycopg.rows import class_row
-from models.amenity import AmenityOut, AmenityIn
+from models.amenity import AmenityOut
 from utils.exceptions import PoolsDatabaseException, AmenitiesDatabaseException
 
 
