@@ -1,15 +1,13 @@
 """
 Database Queries for Pools
 """
-
 import os
 import psycopg
 from psycopg_pool import ConnectionPool
 from psycopg.rows import class_row
 from typing import Optional
 from models.pools import PoolIn, PoolOut, PoolUpdate
-from utils.exceptions import PoolsDatabaseException
-from utils.exceptions import UserDatabaseException
+from utils.exceptions import PoolsDatabaseException, UserDatabaseException
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 if not DATABASE_URL:

@@ -4,6 +4,7 @@ from models.pools import PoolIn, PoolOut
 from models.users import UserResponse
 from utils.authentication import try_get_jwt_user_data
 from queries.pools_queries import PoolQueries
+from queries.pool_amenities_queries import PoolAmenitiesQueries
 from queries.amenity_queries import AmenitiesQueries
 
 
@@ -15,7 +16,8 @@ def create_pools(
     new_pool: PoolIn,
     user: UserResponse = Depends(try_get_jwt_user_data),
     queries: PoolQueries = Depends(),
-    amenities_queries: AmenitiesQueries = Depends()
+    amenities_queries: AmenitiesQueries = Depends(),
+    pool_amenities_queries: PoolAmenitiesQueries = Depends()
 ):
     if not user:
         raise HTTPException(
@@ -26,6 +28,11 @@ def create_pools(
             raise HTTPException(
                 status_code=404, detail="amenity not found")
     pool = queries.create_pool(new_pool=new_pool, poolowner_id=user.id)
+    for amenity_id in new_pool.amenities_ids:
+        pool_amenities_queries.create_pool_amenity(
+            pool_id=pool.id,
+            amenity_id=amenity_id
+        )
     # another for loop as line 24
     # for each amenity id will call a create method from pool_amenities_queries
     # and the pool.id

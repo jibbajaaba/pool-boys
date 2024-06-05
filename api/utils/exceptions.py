@@ -13,3 +13,7 @@ class PoolsDatabaseException(Exception):
 
 class AmenitiesDatabaseException(Exception):
     pass
+
+
+class PoolAmenityDatabaseException(Exception):
+    pass
