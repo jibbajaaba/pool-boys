@@ -21,6 +21,7 @@ app.include_router(pools.router, tags=["pools"])
 app.include_router(amenity.router, tags=["amenities"])
 app.include_router(reservations.router, tags=["reservations"])
 
+
 @app.get("/api/launch-details")
 def launch_details():
     return {

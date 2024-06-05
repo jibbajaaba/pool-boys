@@ -5,9 +5,8 @@ import os
 import psycopg
 from psycopg_pool import ConnectionPool
 from psycopg.rows import class_row
-from typing import Optional
 from models.reservations import ReservationIn, ReservationOut
-from utils.exceptions import PoolsDatabaseException, ReservationDatabaseException
+from utils.exceptions import ReservationDatabaseException
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 if not DATABASE_URL:
