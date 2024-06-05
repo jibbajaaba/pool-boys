@@ -22,10 +22,13 @@ def create_pools(
             status_code=401, detail="Must be logged in to create pool"
             )
     for amenity_id in new_pool.amenities_ids:
-        if not amenity_id:
+        if amenities_queries.get_amenities_id(amenity_id) is None:
             raise HTTPException(
                 status_code=404, detail="amenity not found")
     pool = queries.create_pool(new_pool=new_pool, poolowner_id=user.id)
+    # another for loop as line 24
+    # for each amenity id will call a create method from pool_amenities_queries
+    # and the pool.id
     return pool
 
 

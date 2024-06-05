@@ -31,7 +31,6 @@ class AmenitiesQueries:
                         [id],
                     )
                     amenities = cur.fetchone()
-                    print(amenities, "!!!!!!!!!!!")
                     if not amenities:
                         return None
                     return amenities
