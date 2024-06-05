@@ -33,9 +33,6 @@ def create_pools(
             pool_id=pool.id,
             amenity_id=amenity_id
         )
-    # another for loop as line 24
-    # for each amenity id will call a create method from pool_amenities_queries
-    # and the pool.id
     return pool
 
 

@@ -17,3 +17,7 @@ class AmenitiesDatabaseException(Exception):
 
 class PoolAmenityDatabaseException(Exception):
     pass
+
+
+class ReservationDatabaseException(Exception):
+    pass
