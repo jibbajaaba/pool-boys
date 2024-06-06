@@ -126,7 +126,6 @@ def update_pool(
     )
 
 
-
 @router.get("/api/pools", response_model=list[PoolOut])
 def get_all_pools(
     user: UserResponse = Depends(try_get_jwt_user_data),

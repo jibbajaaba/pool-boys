@@ -19,39 +19,32 @@ class ReservationQueries:
     def create_reservation(
             self,
             new_reservation: ReservationIn,
-            pool_id: int,
             user_id: int,
     ) -> ReservationOut:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor(row_factory=class_row(ReservationOut)) as cur:
-                    cur.execute(
-                        """
-                        INSERT INTO pools (
-                            start_time,
-                            end_time,
-                            pool_id,
-                            user_id
-                        ) VALUES (
-                            %s, %s, %s, %s
-                        )
-                        RETURNING *;
-                        """,
-                        [
-                            new_reservation.start_time,
-                            new_reservation.end_time,
-                            pool_id,
-                            user_id
-                        ],
+        with pool.connection() as conn:
+            with conn.cursor(row_factory=class_row(ReservationOut)) as cur:
+                cur.execute(
+                    """
+                    INSERT INTO reservations (
+                        start_time,
+                        end_time,
+                        pool_id,
+                        user_id
+                    ) VALUES (
+                        %s, %s, %s, %s
                     )
-                    reservation = cur.fetchone()
-                    if not reservation:
-                        raise ReservationDatabaseException(
-                            "Could not create reservation"
-                        )
-                    return reservation
-        except psycopg.Error as e:
-            print(f"Database error: {e}")
-            raise ReservationDatabaseException(
-                "Could not create reservation"
-            )
+                    RETURNING *;
+                    """,
+                    [
+                        new_reservation.start_time,
+                        new_reservation.end_time,
+                        new_reservation.pool_id,
+                        user_id
+                    ],
+                )
+                reservation = cur.fetchone()
+                if not reservation:
+                    raise ReservationDatabaseException(
+                        "Could not create reservation"
+                    )
+                return reservation
