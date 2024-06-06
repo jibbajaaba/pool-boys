@@ -79,4 +79,3 @@ class PoolAmenitiesQueries:
                 )
                 amenity_ids = [row[0] for row in cur.fetchall()]
                 return amenity_ids
-

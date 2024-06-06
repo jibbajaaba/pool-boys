@@ -2,7 +2,6 @@
 Database Queries for Reservations
 """
 import os
-import psycopg
 from psycopg_pool import ConnectionPool
 from psycopg.rows import class_row
 from models.reservations import ReservationIn, ReservationOut
