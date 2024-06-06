@@ -2,6 +2,8 @@ from fastapi import Depends, APIRouter, HTTPException
 from models.reservations import ReservationIn
 from utils.authentication import try_get_jwt_user_data
 from models.users import UserResponse
+from queries.pools_queries import PoolQueries
+from queries.reservations_queries import ReservationQueries
 
 router = APIRouter()
 
@@ -9,10 +11,18 @@ router = APIRouter()
 @router.post("/api/reservations/")
 def create_reservations(
     new_reservation: ReservationIn,
+    pool_id: int,
     user: UserResponse = Depends(try_get_jwt_user_data),
+    reservation_queries: ReservationQueries = Depends(),
+    pool_queries: PoolQueries = Depends(),
 ):
     if not user:
         raise HTTPException(
             status_code=401, detail="Must be logged in to create reservation"
             )
-    return new_reservation
+    reservation = reservation_queries.create_reservation(
+        new_reservation=new_reservation,
+        user_id=user.id,
+        pool_id=pool_id,
+        )
+    return reservation

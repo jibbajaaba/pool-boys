@@ -1,6 +1,6 @@
 
 from fastapi import Depends, APIRouter, HTTPException
-from models.pools import PoolIn, PoolOut
+from models.pools import PoolIn, PoolOut, PoolOutWithAmenityIds
 from models.users import UserResponse
 from utils.authentication import try_get_jwt_user_data
 from queries.pools_queries import PoolQueries
@@ -40,7 +40,8 @@ def create_pools(
 def get_pools_details(
     pool_id: int,
     user: UserResponse = Depends(try_get_jwt_user_data),
-    queries: PoolQueries = Depends()
+    queries: PoolQueries = Depends(),
+    pool_amenities_queries: PoolAmenitiesQueries = Depends()
 ):
     if not user:
         raise HTTPException(
@@ -53,7 +54,13 @@ def get_pools_details(
     if not pools:
         raise HTTPException(
             status_code=404, detail="pool not found")
-    return pools
+    amenities_ids = pool_amenities_queries.get_pool_with_amenities(
+        pool_id=pools.id
+    )
+    return PoolOutWithAmenityIds(
+        **pools.dict(),
+        amenities_ids=amenities_ids
+    )
 
 
 @router.delete("/api/pools/{pool_id}")

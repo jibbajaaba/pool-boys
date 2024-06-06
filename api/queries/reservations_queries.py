@@ -19,7 +19,8 @@ class ReservationQueries:
     def create_reservation(
             self,
             new_reservation: ReservationIn,
-            reservation_id: int,
+            pool_id: int,
+            user_id: int,
     ) -> ReservationOut:
         try:
             with pool.connection() as conn:
@@ -30,7 +31,7 @@ class ReservationQueries:
                             start_time,
                             end_time,
                             pool_id,
-                            user_id,
+                            user_id
                         ) VALUES (
                             %s, %s, %s, %s
                         )
@@ -39,8 +40,8 @@ class ReservationQueries:
                         [
                             new_reservation.start_time,
                             new_reservation.end_time,
-                            new_reservation.pool_id,
-                            new_reservation.user_id,
+                            pool_id,
+                            user_id
                         ],
                     )
                     reservation = cur.fetchone()
@@ -48,8 +49,9 @@ class ReservationQueries:
                         raise ReservationDatabaseException(
                             "Could not create reservation"
                         )
-        except psycopg.Error:
+                    return reservation
+        except psycopg.Error as e:
+            print(f"Database error: {e}")
             raise ReservationDatabaseException(
                 "Could not create reservation"
             )
-        return reservation

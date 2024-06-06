@@ -63,6 +63,20 @@ class PoolAmenitiesQueries:
             print(e)
             raise Exception("Failed to delete pool amenity")
 
-    def foobar(self, pool_id):
-        # Should return a list of amenity ids
-        pass
+    def get_pool_with_amenities(self, pool_id):
+        """
+        Returns a list of amenity ids associated with a given pool_id.
+        """
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT
+                    amenity_id FROM pool_amenities
+                    WHERE pool_id = %s;
+                    """,
+                    (pool_id,)
+                )
+                amenity_ids = [row[0] for row in cur.fetchall()]
+                return amenity_ids
+
