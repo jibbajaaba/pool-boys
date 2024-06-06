@@ -74,24 +74,57 @@ def delete_pool(
     }
 
 
-@router.put("/api/pools/{pool_id}", response_model=PoolOut)
+@router.put("/api/pools/{pool_id}", response_model=PoolOutWithAmenityIds)
 def update_pool(
     pool_id: int,
     pool_data: PoolIn,
     user: UserResponse = Depends(try_get_jwt_user_data),
-    queries: PoolQueries = Depends()
+    queries: PoolQueries = Depends(),
+    pool_amenities_queries: PoolAmenitiesQueries = Depends(),
+    amenities_queries: AmenitiesQueries = Depends()
 ):
-    try:
-        updated_pool = queries.update_pool(
+    if not user:
+        raise HTTPException(
+            status_code=401,
+            detail="Must be logged in to update pool"
+            )
+    for amenity_id in pool_data.amenities_ids:
+        if amenities_queries.get_amenities_id(amenity_id) is None:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Amenity {amenity_id} not found"
+                )
+    updated_pool = queries.update_pool(
+        pool_id=pool_id,
+        pools=pool_data,
+        poolowner_id=user.id
+    )
+    if not updated_pool:
+        raise HTTPException(
+            status_code=404,
+            detail="Pool not found"
+            )
+    original_amenity_ids = set(pool_amenities_queries.get_pool_with_amenities(
+        pool_id=pool_id
+        ))
+    new_amenity_ids = set(pool_data.amenities_ids)
+    to_add = new_amenity_ids - original_amenity_ids
+    to_delete = original_amenity_ids - new_amenity_ids
+    for amenity_id in to_delete:
+        pool_amenities_queries.delete(pool_id=pool_id, amenity_id=amenity_id)
+    for amenity_id in to_add:
+        pool_amenities_queries.create_pool_amenity(
             pool_id=pool_id,
-            pools=pool_data,
-            poolowner_id=user.id
+            amenity_id=amenity_id
+            )
+    amenities_ids = pool_amenities_queries.get_pool_with_amenities(
+        pool_id=pool_id
         )
-        if not updated_pool:
-            raise HTTPException(status_code=404)
-        return updated_pool
-    except ValueError as e:
-        raise HTTPException(status_code=404, detail=str(e))
+    return PoolOutWithAmenityIds(
+        **updated_pool.dict(),
+        amenities_ids=amenities_ids
+    )
+
 
 
 @router.get("/api/pools", response_model=list[PoolOut])
