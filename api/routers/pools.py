@@ -71,9 +71,6 @@ def delete_pool(
     queries: PoolQueries = Depends(),
     pool_amenities_queries: PoolAmenitiesQueries = Depends()
 ):
-    # look for pool and throw 404 (get by pool owner id)
-    # delete all associations line 75, get all ids and delete in for loop (delete)
-    # for pool id giving amenity id as well
     if not poolowner_id:
         raise HTTPException(
             status_code=404, detail="You are not the pool owner"
@@ -82,7 +79,9 @@ def delete_pool(
     for amenity_ids in amenity_list:
         pool_amenities_queries.delete(amenity_id=amenity_ids, pool_id=pool_id)
     return {
-        "success": queries.delete_pool(pool_id=pool_id, poolowner_id=user.id)
+        "success": queries.delete_pool(
+            pool_id=pool_id,
+            poolowner_id=user.id)
     }
 
 
