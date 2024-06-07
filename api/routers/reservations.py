@@ -23,6 +23,7 @@ def create_reservations(
         )
     return reservation
 
+
 @router.get("/api/reservations", response_model=list[ReservationOut])
 def get_all_reservations(
     user: UserResponse = Depends(try_get_jwt_user_data),
