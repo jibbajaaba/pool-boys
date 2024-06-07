@@ -73,7 +73,7 @@ class ReservationQueries:
                         SELECT
                             *
                         FROM reservations
-                        WHERE id = %s
+                        WHERE id = %s AND user_id
                         """,
                     [id],
                 )
@@ -81,3 +81,17 @@ class ReservationQueries:
                 if not reservation:
                     return None
                 return reservation
+
+    def delete_reservation(self, id: int, user_id: int) -> ReservationOut:
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                result = cur.execute(
+                    """
+                        DELETE FROM reservations
+                        WHERE id = %s AND user_id = %s
+                        """,
+                    [id, user_id],
+                )
+            if not result:
+                return {"success": False, "message": "reservation not found"}
+            return True

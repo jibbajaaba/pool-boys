@@ -49,3 +49,22 @@ def get_reservations_by_id(
         raise HTTPException(
             status_code=404, detail="reservation not found")
     return reservation
+
+
+@router.delete("/api/reservation/{id}")
+def reservation_delete(
+    id: int,
+    user_id: int,
+    user: UserResponse = Depends(try_get_jwt_user_data),
+    reservation_queries: ReservationQueries = Depends()
+):
+    if not user_id:
+        raise HTTPException(
+            status_code=404, detail="You are not authorized"
+        )
+    return {
+        "success": reservation_queries.delete_reservation(
+            id=id,
+            user_id=user.id
+            )
+    }
