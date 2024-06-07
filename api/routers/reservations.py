@@ -33,6 +33,7 @@ def get_all_reservations(
         raise HTTPException(status_code=401, detail="Unauthorized")
     return reservation_queries.get_all_reservations()
 
+
 @router.get("/api/reservations/{id}", response_model=ReservationOut)
 def get_reservations_by_id(
     id: int,
