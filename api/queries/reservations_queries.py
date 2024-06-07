@@ -4,6 +4,7 @@ Database Queries for Reservations
 import os
 from psycopg_pool import ConnectionPool
 from psycopg.rows import class_row
+from typing import Optional
 from models.reservations import ReservationIn, ReservationOut
 from utils.exceptions import ReservationDatabaseException
 
@@ -51,5 +52,32 @@ class ReservationQueries:
     def get_all_reservations(self):
         with pool.connection() as conn:
             with conn.cursor(row_factory=class_row(ReservationOut)) as cur:
-                cur.execute("SELECT * FROM reservations;")
-                return cur.fetchall()
+                cur.execute(
+                    """
+                    SELECT *
+                    FROM reservations;
+                    """
+                )
+                reservation = cur.fetchall()
+                if not reservation:
+                    raise ReservationDatabaseException(
+                        "Could not get all reservations"
+                    )
+                return reservation
+
+    def get_reservation_by_id(self, id: int) -> Optional[ReservationOut]:
+        with pool.connection() as conn:
+            with conn.cursor(row_factory=class_row(ReservationOut)) as cur:
+                cur.execute(
+                    """
+                        SELECT
+                            *
+                        FROM reservations
+                        WHERE id = %s
+                        """,
+                    [id],
+                )
+                reservation = cur.fetchone()
+                if not reservation:
+                    return None
+                return reservation

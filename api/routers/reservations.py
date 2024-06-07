@@ -32,3 +32,19 @@ def get_all_reservations(
     if not user:
         raise HTTPException(status_code=401, detail="Unauthorized")
     return reservation_queries.get_all_reservations()
+
+@router.get("/api/reservations/{id}", response_model=ReservationOut)
+def get_reservations_by_id(
+    id: int,
+    user: UserResponse = Depends(try_get_jwt_user_data),
+    reservation_queries: ReservationQueries = Depends()
+):
+    if not user:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    reservation = reservation_queries.get_reservation_by_id(
+        id=id
+    )
+    if not reservation:
+        raise HTTPException(
+            status_code=404, detail="reservation not found")
+    return reservation

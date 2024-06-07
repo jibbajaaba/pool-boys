@@ -67,15 +67,19 @@ class PoolAmenitiesQueries:
         """
         Returns a list of amenity ids associated with a given pool_id.
         """
-        with pool.connection() as conn:
-            with conn.cursor() as cur:
-                cur.execute(
-                    """
-                    SELECT
-                    amenity_id FROM pool_amenities
-                    WHERE pool_id = %s;
-                    """,
-                    (pool_id,)
-                )
-                amenity_ids = [row[0] for row in cur.fetchall()]
-                return amenity_ids
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT
+                        amenity_id FROM pool_amenities
+                        WHERE pool_id = %s;
+                        """,
+                        (pool_id,)
+                    )
+                    amenity_ids = [row[0] for row in cur.fetchall()]
+                    return amenity_ids
+        except psycopg.Error as e:
+            print(e)
+            raise Exception("Failed to get pool with amenities")
