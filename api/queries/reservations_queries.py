@@ -2,6 +2,7 @@
 Database Queries for Reservations
 """
 import os
+from fastapi import HTTPException
 from psycopg_pool import ConnectionPool
 from psycopg.rows import class_row
 from typing import Optional
@@ -60,12 +61,15 @@ class ReservationQueries:
                 )
                 reservation = cur.fetchall()
                 if not reservation:
-                    raise ReservationDatabaseException(
-                        "Could not get all reservations"
-                    )
+                    raise HTTPException(
+                            status_code=404, detail="No reservations found")
                 return reservation
 
-    def get_reservation_by_id(self, id: int) -> Optional[ReservationOut]:
+    def get_reservation_by_id(
+            self,
+            id: int,
+            user_id
+            ) -> Optional[ReservationOut]:
         with pool.connection() as conn:
             with conn.cursor(row_factory=class_row(ReservationOut)) as cur:
                 cur.execute(
@@ -73,9 +77,9 @@ class ReservationQueries:
                         SELECT
                             *
                         FROM reservations
-                        WHERE id = %s AND user_id
+                        WHERE id = %s AND user_id = %s
                         """,
-                    [id],
+                    [id, user_id],
                 )
                 reservation = cur.fetchone()
                 if not reservation:

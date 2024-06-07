@@ -31,7 +31,11 @@ def get_all_reservations(
 ):
     if not user:
         raise HTTPException(status_code=401, detail="Unauthorized")
-    return reservation_queries.get_all_reservations()
+    reservations = reservation_queries.get_all_reservations()
+    if not reservations:
+        raise HTTPException(
+                status_code=404, detail="No reservations found")
+    return reservations
 
 
 @router.get("/api/reservations/{id}", response_model=ReservationOut)
@@ -43,7 +47,8 @@ def get_reservations_by_id(
     if not user:
         raise HTTPException(status_code=401, detail="Unauthorized")
     reservation = reservation_queries.get_reservation_by_id(
-        id=id
+        id=id,
+        user_id=user.id
     )
     if not reservation:
         raise HTTPException(
@@ -51,14 +56,13 @@ def get_reservations_by_id(
     return reservation
 
 
-@router.delete("/api/reservation/{id}")
+@router.delete("/api/reservations/{id}")
 def reservation_delete(
     id: int,
-    user_id: int,
     user: UserResponse = Depends(try_get_jwt_user_data),
     reservation_queries: ReservationQueries = Depends()
 ):
-    if not user_id:
+    if not user:
         raise HTTPException(
             status_code=404, detail="You are not authorized"
         )
