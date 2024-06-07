@@ -1,5 +1,5 @@
 from fastapi import Depends, APIRouter, HTTPException
-from models.reservations import ReservationIn
+from models.reservations import ReservationIn, ReservationOut
 from utils.authentication import try_get_jwt_user_data
 from models.users import UserResponse
 from queries.reservations_queries import ReservationQueries
@@ -22,3 +22,12 @@ def create_reservations(
         user_id=user.id,
         )
     return reservation
+
+@router.get("/api/reservations", response_model=list[ReservationOut])
+def get_all_reservations(
+    user: UserResponse = Depends(try_get_jwt_user_data),
+    reservation_queries: ReservationQueries = Depends()
+):
+    if not user:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    return reservation_queries.get_all_reservations()

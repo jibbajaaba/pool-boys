@@ -47,3 +47,9 @@ class ReservationQueries:
                         "Could not create reservation"
                     )
                 return reservation
+
+    def get_all_reservations(self):
+        with pool.connection() as conn:
+                with conn.cursor(row_factory=class_row(ReservationOut)) as cur:
+                    cur.execute("SELECT * FROM reservations;")
+                    return cur.fetchall()
