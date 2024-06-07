@@ -75,13 +75,19 @@ def delete_pool(
         raise HTTPException(
             status_code=404, detail="You are not the pool owner"
         )
-    amenity_list = pool_amenities_queries.get_pool_with_amenities(pool_id=pool_id)
+    amenity_list = pool_amenities_queries.get_pool_with_amenities(
+        pool_id=pool_id
+        )
     for amenity_ids in amenity_list:
-        pool_amenities_queries.delete(amenity_id=amenity_ids, pool_id=pool_id)
+        pool_amenities_queries.delete(
+            amenity_id=amenity_ids,
+            pool_id=pool_id
+            )
     return {
         "success": queries.delete_pool(
             pool_id=pool_id,
-            poolowner_id=user.id)
+            poolowner_id=user.id
+            )
     }
 
 
