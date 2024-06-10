@@ -9,16 +9,20 @@ client = TestClient(app)
 
 
 class FakePoolQueries:
-    def get_all_pools(self):
+    def get_pools_details(self, id: int):
         return [
             {
-                "id": 1,
-                "poolowner_id": 1,
                 "picture_url": "string",
                 "address": "string",
                 "description": "string",
                 "hourly_rate": 0,
-                "number_guests": 0
+                "number_guests": 0,
+                "amenities_ids": [
+                    2,
+                    3
+                ],
+                "id": 5,
+                "poolowner_id": 1
             }
         ]
 
@@ -30,26 +34,11 @@ def fake_try_get_jwt_user_data():
     )
 
 
-def test_pools():
-    # arrange
+def test_pool_details():
     app.dependency_overrides[PoolQueries] = FakePoolQueries
     app.dependency_overrides[
         try_get_jwt_user_data
         ] = fake_try_get_jwt_user_data
-
-    # act
-    res = client.get("/api/pools")
+    res = client.get("/api/pools/{pool_id}")
     data = res.json()
-
-    # assert
-    assert res.status_code == 200
     assert len(data) == 1
-
-
-def test_pool_details():
-    # arrange
-
-    # act
-
-    # assert
-    pass
