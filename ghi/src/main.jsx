@@ -2,6 +2,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { store } from './app/store'
+import { Provider } from 'react-redux'
 
 import SignInForm from './components/SignInForm'
 import SignUpForm from './components/SignUpForm'
@@ -49,6 +51,9 @@ console.table(import.meta.env)
 const root = ReactDOM.createRoot(rootElement)
 root.render(
     <React.StrictMode>
+        <Provider store={store}>
+            <App />
+        </Provider>
         <AuthProvider>
             <RouterProvider router={router} />
         </AuthProvider>
