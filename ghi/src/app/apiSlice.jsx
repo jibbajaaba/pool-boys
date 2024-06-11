@@ -38,7 +38,28 @@ export const PoolBoysApi = createApi({
                 body
             }),
             providesTags: ['User']
-        })
+        }),
+        createPool: builder.mutation({
+            query: (body) => ({
+                url: 'api/pools',
+                method: 'POST',
+                body
+            }),
+            providesTags: ['Pool']
+        }),
+        getPoolDetails: builder.query({
+            query: (id) => ({
+                url: `api/pools/${id}`
+            }),
+            providesTags: ['Pool']
+        }),
+        deletePool: builder.mutation({
+            query: () => ({
+                url: `/api/pools/${id}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['Pool']
+        }),
     }),
 });
 
@@ -47,7 +68,10 @@ export const {
     useGetUserQuery,
     useSignoutUserMutation,
     useSigninUserMutation,
-    useSignupUserMutation
+    useSignupUserMutation,
+    useCreatePoolMutation,
+    useGetPoolDetailsQuery,
+    useDeletePoolMutation,
 } = PoolBoysApi;
 
 

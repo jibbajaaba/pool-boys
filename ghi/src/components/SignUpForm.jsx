@@ -63,7 +63,6 @@ export default function SignInForm() {
             <input
                 type="email"
                 name="email"
-                // pattern='.+@example\.com'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter Email"
