@@ -117,7 +117,7 @@ async def signin(
 async def authenticate(
     user: UserResponse = Depends(try_get_jwt_user_data),
     queries: UserQueries = Depends(),
-) -> UserDetail:
+) -> UserDetail | None:
     """
     This function returns the user if the user is logged in.
 
@@ -129,10 +129,7 @@ async def authenticate(
     This can be used in your frontend to determine if a user
     is logged in or not
     """
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Not logged in"
-        )
+
     user_details = queries.get_by_id(user.id)
     return user_details
 

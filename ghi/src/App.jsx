@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
+
+
 // import ErrorNotification from './components/ErrorNotification'
 // import Construct from './components/Construct'
 
@@ -55,7 +57,7 @@ function App() {
 
     return (
         <div className="App">
-            <header className="App-header">{/* <Nav /> */}</header>
+            {/* <Nav /> */}
             <Outlet />
         </div>
     )

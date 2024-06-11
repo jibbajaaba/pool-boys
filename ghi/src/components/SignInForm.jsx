@@ -1,19 +1,26 @@
 // @ts-check
 import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
+import { useSigninUserMutation } from '../app/apiSlice';
 
 
 export default function SignInForm() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [signin, signinStatus] = useSigninUserMutation()
 
+    console.log(signinStatus)
 
     /**
      * @param {React.FormEvent<HTMLFormElement>} e
      */
+    // does line 17 (the line below this) need to be a const handle submit???
     async function handleFormSubmit(e) {
         e.preventDefault()
-        //sign in
+        signin({
+            username: username,
+            password: password
+        })
     }
 
 
