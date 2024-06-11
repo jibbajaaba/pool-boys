@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
-import ErrorNotification from './components/ErrorNotification'
-import Construct from './components/Construct'
+// import ErrorNotification from './components/ErrorNotification'
+// import Construct from './components/Construct'
 
-import './App.css'
+// import './App.css'
 
 // When using environment variables, you should do a check to see if
 // they are defined or not and throw an appropriate error message
@@ -57,8 +57,6 @@ function App() {
         <div className="App">
             <header className="App-header">{/* <Nav /> */}</header>
             <Outlet />
-            <ErrorNotification error={error} />
-            <Construct info={launchInfo} />
         </div>
     )
 }

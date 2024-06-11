@@ -5,12 +5,14 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { store } from './app/store'
 import { Provider } from 'react-redux'
 
+import Home from './components/Home'
+import PoolsList from './components/PoolsList'
 import SignInForm from './components/SignInForm'
 import SignUpForm from './components/SignUpForm'
 import App from './App'
-import AuthProvider from './components/AuthProvider'
 
-import './index.css'
+
+// import './index.css'
 
 const BASE_URL = import.meta.env.BASE_URL
 if (!BASE_URL) {
@@ -24,12 +26,20 @@ const router = createBrowserRouter(
             element: <App />,
             children: [
                 {
+                    index: true,
+                    element: <Home />,
+                },
+                {
                     path: 'signup',
                     element: <SignUpForm />,
                 },
                 {
                     path: 'signin',
                     element: <SignInForm />,
+                },
+                {
+                    path: 'pools',
+                    element: <PoolsList />,
                 },
             ],
         },
@@ -46,16 +56,14 @@ if (!rootElement) {
 
 // Log out the environment variables while you are developing and deploying
 // This will help debug things
-console.table(import.meta.env)
+// console.table(import.meta.env)
 
 const root = ReactDOM.createRoot(rootElement)
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App />
-        </Provider>
-        <AuthProvider>
             <RouterProvider router={router} />
-        </AuthProvider>
+        </Provider>
     </React.StrictMode>
 )
+
