@@ -1,21 +1,3 @@
-// import { useGetAllPoolsQuery } from '../app/apiSlice'
-
-// const PoolsList = () => {
-//     const { data, isLoading } = useGetAllPoolsQuery()
-//     console.log({data})
-//     if (isLoading) return <div>Loading...</div>;
-//     return (
-//         <div className='row mt-3'>
-//             {data.description}
-//         </div>
-//     )
-// };
-
-// export default PoolsList;
-
-
-
-
 import React from 'react';
 import { useGetAllPoolsQuery } from '../app/apiSlice';
 
