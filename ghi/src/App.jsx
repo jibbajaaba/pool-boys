@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom'
 // import ErrorNotification from './components/ErrorNotification'
 // import Construct from './components/Construct'
 
-// import './App.css'
+import './App.css'
 
 // When using environment variables, you should do a check to see if
 // they are defined or not and throw an appropriate error message
