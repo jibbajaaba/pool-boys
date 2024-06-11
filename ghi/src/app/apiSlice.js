@@ -46,8 +46,6 @@ export const {
 
 
 
-
-
 // import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 // export const PoolBoysApi = createApi({
@@ -56,12 +54,12 @@ export const {
 //     tagTypes: ['Reservation', 'Pool', 'Amenity', 'User'],  
 //     endpoints: (builder) => ({
 
-        // signin: builder.mutation({
-        //     query: (credentials) => ({
-        //         url: '/signin',
-        //         method: 'POST',
-        //         body: credentials,
-        //     }),
+//         signin: builder.mutation({
+//             query: (credentials) => ({
+//                 url: '/signin',
+//                 method: 'POST',
+//                 body: credentials,
+//             }),
 //         }),
 //         signupUser: builder.mutation({
 //             query: (userDetails) => ({
