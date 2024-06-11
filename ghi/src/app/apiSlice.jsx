@@ -30,6 +30,14 @@ export const PoolBoysApi = createApi({
                 body
             }),
             invalidatesTags: ['User']
+        }),
+        signupUser: builder.mutation({
+            query: (body) => ({
+                url: 'api/auth/signup',
+                method: 'POST',
+                body
+            }),
+            providesTags: ['User']
         })
     }),
 });
@@ -39,6 +47,7 @@ export const {
     useGetUserQuery,
     useSignoutUserMutation,
     useSigninUserMutation,
+    useSignupUserMutation
 } = PoolBoysApi;
 
 
@@ -51,7 +60,7 @@ export const {
 // export const PoolBoysApi = createApi({
 //     reducerPath: 'api',
 //     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000' }),
-//     tagTypes: ['Reservation', 'Pool', 'Amenity', 'User'],  
+//     tagTypes: ['Reservation', 'Pool', 'Amenity', 'User'],
 //     endpoints: (builder) => ({
 
 //         signin: builder.mutation({
@@ -61,13 +70,13 @@ export const {
 //                 body: credentials,
 //             }),
 //         }),
-//         signupUser: builder.mutation({
-//             query: (userDetails) => ({
-//                 url: '/signup',
-//                 method: 'POST',
-//                 body: userDetails,
-//             }),
-//             invalidatesTags: ['User'],
+        // signupUser: builder.mutation({
+        //     query: (userDetails) => ({
+        //         url: '/signup',
+        //         method: 'POST',
+        //         body: userDetails,
+        //     }),
+        //     invalidatesTags: ['User'],
 //         }),
 //         authenticateUser: builder.query({
 //             query: () => '/authenticate',
