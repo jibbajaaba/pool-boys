@@ -2,7 +2,7 @@
 //@ts-check
 import { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
-
+import Nav from './components/Nav'
 
 
 // import ErrorNotification from './components/ErrorNotification'
@@ -57,7 +57,7 @@ function App() {
 
     return (
         <div className="App">
-            {/* <Nav /> */}
+            <Nav />
             <Outlet />
         </div>
     )
