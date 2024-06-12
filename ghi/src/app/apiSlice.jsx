@@ -76,33 +76,12 @@ export const PoolBoysApi = createApi({
             }),
             invalidatesTags: ['Pools']
         }),
-        // getAllReservations: builder.query({
-        //     query: () => ({
-        //         url: '/api/reservations',
-        //     }),
-        //     providesTags: ['Reservations']
-        // }),
-        // createReservations: builder.mutation({
-        //     query: (body) => ({
-        //         url: '/api/reservations',
-        //         method: 'POST',
-        //         body
-        //     }),
-        //     providesTags: ['Reservations']
-        // }),
-        // getReservationById: builder.query({
-        //     query: (id) => ({
-        //         url: `/api/reservations/${id}`
-        //     }),
-        //     providesTags: ['Reservations']
-        // }),
-        // reservationDelete: builder.mutation({
-        //     query: (id) => ({
-        //         url: `/api/reservations/${id}`,
-        //         method: 'DELETE'
-        //     }),
-        //     invalidatesTags: ['Reservations']
-        // }),
+        getAllReservationsByPoolId: builder.query({
+            query: (pool_id) => ({
+                url: `/api/pools/${pool_id}/reservations`,
+            }),
+            providesTags: [{type: 'Reservations', pool_id: 'LIST'}]
+        }),
         getAllAmenities: builder.query({
             query: () => ({
                 url: '/api/amenities'
@@ -121,10 +100,7 @@ export const PoolBoysApi = createApi({
 export const {
     useGetAllAmenitiesQuery,
     useGetAmenityQuery,
-    // useReservationDeleteMutation,
-    // useGetReservationByIdQuery,
-    // useCreateReservationsMutation,
-    // useGetAllReservationsQuery,
+    useGetAllReservationsByPoolIdQuery,
     useGetUserQuery,
     useSignoutUserMutation,
     useSigninUserMutation,

@@ -12,8 +12,6 @@ export default function SignInForm() {
     const [age, setAge] = useState('')
     const [signup, signupStatus] = useSignupUserMutation()
 
-    console.log(signupStatus)
-
     /**
      * @param {React.FormEvent<HTMLFormElement>} e
      */
