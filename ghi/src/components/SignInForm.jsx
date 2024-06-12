@@ -14,7 +14,6 @@ export default function SignInForm() {
     /**
      * @param {React.FormEvent<HTMLFormElement>} e
      */
-    // does line 17 (the line below this) need to be a const handle submit???
     async function handleFormSubmit(e) {
         e.preventDefault()
         signin({

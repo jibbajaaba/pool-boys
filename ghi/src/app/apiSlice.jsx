@@ -6,85 +6,132 @@ export const PoolBoysApi = createApi({
         baseUrl: import.meta.env.VITE_API_HOST,
         credentials: 'include',
     }),
+    tagTypes: [
+        'User',
+        'Pool',
+        'Reservation',
+        'Amenity'
+    ],
     endpoints: (builder) => ({
-        getAllPools: builder.query({
-            query: () => '/api/pools',
-        }),
         getUser: builder.query({
             query: () => ({
-                url: '/api/auth/authenticate',
+                url: '/api/auth/authenticate'
             }),
-            providesTags: ['User'],
+            providesTags: ['User']
         }),
         signoutUser: builder.mutation({
             query: () => ({
                 url: '/api/auth/signout',
-                method: 'DELETE',
+                method: 'DELETE'
             }),
-            invalidatesTags: ['User'],
+            invalidatesTags: ['User']
         }),
         signinUser: builder.mutation({
             query: (body) => ({
                 url: 'api/auth/signin',
                 method: 'POST',
-                body,
+                body
             }),
-            invalidatesTags: ['User'],
+            invalidatesTags: ['User']
         }),
         signupUser: builder.mutation({
             query: (body) => ({
                 url: 'api/auth/signup',
                 method: 'POST',
-                body,
+                body
             }),
-            providesTags: ['User'],
+            providesTags: ['User']
+        }),
+        getAllPools: builder.query({
+            query: () => ({
+                url:'/api/pools'
+            }),
+            providesTags: ['Pools']
         }),
         createPool: builder.mutation({
             query: (body) => ({
                 url: 'api/pools',
                 method: 'POST',
-                body,
+                body
             }),
-            providesTags: ['Pool'],
+            providesTags: ['Pools']
         }),
         getPoolDetails: builder.query({
-            query: (id) => ({
-                url: `api/pools/${id}`,
+            query: (pool_id) => ({
+                url: `api/pools/${pool_id}`
             }),
-            providesTags: ['Pool'],
+            providesTags: ['Pools']
         }),
         deletePool: builder.mutation({
+            query: (pool_id) => ({
+                url: `/api/pools/${pool_id}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['Pools']
+        }),
+        updatePool: builder.mutation({
+            query: (pool_id) => ({
+                url: `/api/pools/${pool_id}`,
+                method: 'PUT'
+            }),
+            invalidatesTags: ['Pools']
+        }),
+        // getAllReservations: builder.query({
+        //     query: () => ({
+        //         url: '/api/reservations',
+        //     }),
+        //     providesTags: ['Reservations']
+        // }),
+        // createReservations: builder.mutation({
+        //     query: (body) => ({
+        //         url: '/api/reservations',
+        //         method: 'POST',
+        //         body
+        //     }),
+        //     providesTags: ['Reservations']
+        // }),
+        // getReservationById: builder.query({
+        //     query: (id) => ({
+        //         url: `/api/reservations/${id}`
+        //     }),
+        //     providesTags: ['Reservations']
+        // }),
+        // reservationDelete: builder.mutation({
+        //     query: (id) => ({
+        //         url: `/api/reservations/${id}`,
+        //         method: 'DELETE'
+        //     }),
+        //     invalidatesTags: ['Reservations']
+        // }),
+        getAllAmenities: builder.query({
             query: () => ({
-                url: `/api/pools/${id}`,
-                method: 'DELETE',
+                url: '/api/amenities'
             }),
-            invalidatesTags: ['Pool'],
+            providesTags: [{type: 'Amenities', id: 'LIST'}]
         }),
-        getReservations: builder.query({
-            query: () => ({
-                url: '/api/reservations',
+        getAmenity: builder.query({
+            query: (id) => ({
+                url: `/api/amenities/${id}`
             }),
+            providesTags: (_result, _error, arg) => [{type: 'Amenities', id: arg}],
         }),
-        createReservations: builder.mutation({
-            query: (body) => ({
-                url: '/api/reservations',
-                method: 'POST',
-                body,
-            }),
-            providesTags: ['Reservations'],
-        }),
-    }),
+    })
 })
 
 export const {
-    useCreateReservationsMutation,
-    useGetReservationsQuery,
-    useGetAllPoolsQuery,
+    useGetAllAmenitiesQuery,
+    useGetAmenityQuery,
+    // useReservationDeleteMutation,
+    // useGetReservationByIdQuery,
+    // useCreateReservationsMutation,
+    // useGetAllReservationsQuery,
     useGetUserQuery,
     useSignoutUserMutation,
     useSigninUserMutation,
     useSignupUserMutation,
     useCreatePoolMutation,
+    useGetAllPoolsQuery,
     useGetPoolDetailsQuery,
     useDeletePoolMutation,
+    useUpdatePoolMutation
 } = PoolBoysApi
