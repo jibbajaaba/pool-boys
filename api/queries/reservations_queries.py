@@ -74,11 +74,11 @@ class ReservationQueries:
             with conn.cursor(row_factory=class_row(ReservationOut)) as cur:
                 cur.execute(
                     """
-                        SELECT
-                            *
-                        FROM reservations
-                        WHERE id = %s AND user_id = %s
-                        """,
+                    SELECT
+                        *
+                    FROM reservations
+                    WHERE id = %s AND user_id = %s
+                    """,
                     [id, user_id],
                 )
                 reservation = cur.fetchone()
@@ -99,3 +99,23 @@ class ReservationQueries:
             if not result:
                 return {"success": False, "message": "reservation not found"}
             return True
+
+    def get_reservation_by_pool_id(
+            self,
+            pool_id: int
+            ) -> Optional[ReservationOut]:
+        with pool.connection() as conn:
+            with conn.cursor(row_factory=class_row(ReservationOut)) as cur:
+                cur.execute(
+                    """
+                    SELECT
+                        *
+                    FROM reservations
+                    WHERE pool_id = %s
+                    """,
+                    [pool_id],
+                )
+                reservation = cur.fetchall()
+                if not reservation:
+                    return None
+                return reservation
