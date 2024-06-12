@@ -1,12 +1,6 @@
-// This makes VSCode check types as if you are using TypeScript
-//@ts-check
-import { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import Nav from './components/Nav'
 
-
-// import ErrorNotification from './components/ErrorNotification'
-// import Construct from './components/Construct'
 
 import './App.css'
 
@@ -26,34 +20,6 @@ if (!API_HOST) {
  * @returns {React.ReactNode}
  */
 function App() {
-    // Replace this App component with your own.
-    /** @type {[LaunchInfo | undefined, (info: LaunchInfo) => void]} */
-    const [launchInfo, setLaunchInfo] = useState()
-    const [error, setError] = useState(null)
-
-    useEffect(() => {
-        async function getData() {
-            let url = `${API_HOST}/api/launch-details`
-            console.log('fastapi url: ', url)
-            let response = await fetch(url)
-            /** @type {LaunchData} */
-            let data = await response.json()
-
-            if (response.ok) {
-                if (!data.launch_details) {
-                    console.log('drat! no launch data')
-                    setError('No launch data')
-                    return
-                }
-                console.log('got launch data!')
-                setLaunchInfo(data.launch_details)
-            } else {
-                console.log('drat! something happened')
-                setError(data.message)
-            }
-        }
-        getData()
-    }, [])
 
     return (
         <div className="App">
