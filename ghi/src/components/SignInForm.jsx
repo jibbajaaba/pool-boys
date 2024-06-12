@@ -9,7 +9,6 @@ export default function SignInForm() {
     const [password, setPassword] = useState('')
     const [signin, signinStatus] = useSigninUserMutation()
 
-    console.log(signinStatus)
 
     /**
      * @param {React.FormEvent<HTMLFormElement>} e

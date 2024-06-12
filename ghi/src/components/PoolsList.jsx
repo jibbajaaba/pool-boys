@@ -3,7 +3,7 @@ import { useGetAllPoolsQuery } from '../app/apiSlice';
 
 const PoolsList = () => {
     const { data: pools, isLoading, error } = useGetAllPoolsQuery();
-    
+
     if (isLoading) return <div>Loading pools...</div>;
     if (error) return <div>Error loading pools: {error.message}</div>;
 
@@ -12,7 +12,7 @@ const PoolsList = () => {
             {pools && pools.length > 0 ? (
                 pools.map((pool) => (
                     <div key={pool.id} className="pool">
-                        <h3>{pool.name}</h3>
+                        <h3>{pool.id}</h3>
                         <p>{pool.picture_url}</p>
                         <p>{pool.address}</p>
                         <p>{pool.description}</p>
@@ -28,4 +28,3 @@ const PoolsList = () => {
 };
 
 export default PoolsList;
-
