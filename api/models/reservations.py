@@ -20,5 +20,3 @@ class ReservationOut(BaseModel):
     end_time: datetime
     pool_id: int
     user_id: int
-
-
