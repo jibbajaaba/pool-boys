@@ -8,21 +8,23 @@ const PoolsList = () => {
     if (error) return <div>Error loading pools: {error.message}</div>;
 
     return (
-        <div className='row mt-3'>
-            {pools && pools.length > 0 ? (
-                pools.map((pool) => (
-                    <div key={pool.id} className="pool">
-                        <h3>{pool.id}</h3>
-                        <p>{pool.picture_url}</p>
-                        <p>{pool.address}</p>
-                        <p>{pool.description}</p>
-                        <p>{pool.hourly_rate}</p>
-                        <p>{pool.number_guests}</p>
-                    </div>
-                ))
-            ) : (
-                <div>No pools available.</div>
-            )}
+        <div className="p-4">
+            <h1 className="text-2xl font-bold mb-4">Pool List</h1>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {pools.map(pool => (
+                    <li key={pool.id} className="border rounded-lg shadow-md p-4 bg-white">
+                        <img
+                            src={pool.picture_url}
+                            alt="Pool"
+                            className="w-full h-48 object-cover rounded-t-lg"
+                        />
+                        <div className="mt-2">
+                            <div className="text-lg font-semibold">{pool.address}</div>
+                            <div className="text-gray-600">Hourly Rate: ${pool.hourly_rate}</div>
+                        </div>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };

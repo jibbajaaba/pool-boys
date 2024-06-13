@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom"
 import { useGetUserQuery, useSignoutUserMutation } from "../app/apiSlice"
 import { useEffect } from "react"
 
-
 const Nav = () => {
   const { data: user, isLoading } = useGetUserQuery()
   const [signOut, signOutStatus] = useSignoutUserMutation()
@@ -11,54 +10,49 @@ const Nav = () => {
     if (signOutStatus.isSuccess) {
       window.location.reload()
     }
-  })
+  }, [signOutStatus.isSuccess])
 
   if (isLoading) return <div>Loading...</div>
   return (
-    <div>
-      <nav>
-        <div className="size-20 ...">
-        <img
-          src="/PoolBoys_Logo.png"
-          alt="PoolBoys Logo"
-        />
-        <div/>
-          <div>
-            <NavLink to="/">
-              PoolBoys
-            </NavLink>
-            <div>
-              <ul>
-                {!user && <li>
-                  <NavLink to={'/signup'}>
-                    Sign Up
-                  </NavLink>
-                </li>}
-                {!user && <li>
-                  <NavLink to={'/signin'}>
-                    Signin
-                  </NavLink>
-                </li>}
-                {user && <li>
-                  <NavLink to={'/'}>
-                    My Profile
-                  </NavLink>
-                </li>}
-                {user && <li>
-                  <NavLink to={'/pools'}>
-                    Pools
-                  </NavLink>
-                </li>}
-                {user && <button
-                onClick={() => {
-                  signOut()
-                }}
-                >
-                  Logout
-                </button>}
-              </ul>
-            </div>
-          </div>
+    <div className="sidebar">
+      <nav className="nav">
+        <div className="logo">
+          <img
+            src="/PoolBoys_Logo.png"
+            alt="PoolBoys Logo"
+            className="w-24"
+          />
+        </div>
+        <div className="nav-links">
+          <NavLink to="/">PoolBoys</NavLink>
+          <ul>
+            {!user && (
+              <li>
+                <NavLink to="/signup">Sign Up</NavLink>
+              </li>
+            )}
+            {!user && (
+              <li>
+                <NavLink to="/signin">Signin</NavLink>
+              </li>
+            )}
+            {user && (
+              <>
+                <li>
+                  <NavLink to="/">My Profile</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/pools">Pools</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/pools/create">Create Pool</NavLink>
+                </li>
+                <li>
+                  <button onClick={signOut}>Logout</button>
+                </li>
+              </>
+            )}
+          </ul>
         </div>
       </nav>
     </div>

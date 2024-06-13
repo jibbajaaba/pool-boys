@@ -10,7 +10,7 @@ export default function SignInForm() {
     const [email, setEmail] = useState('')
     const [phone_number, setPhoneNumber] = useState('')
     const [age, setAge] = useState('')
-    const [signup, signupStatus] = useSignupUserMutation()
+    const [signup, { isLoading }] = useSignupUserMutation()
 
     /**
      * @param {React.FormEvent<HTMLFormElement>} e
@@ -80,7 +80,9 @@ export default function SignInForm() {
                 onChange={(e) => setAge(e.target.value)}
                 placeholder="Enter Age"
             />
-            <button type="submit">Sign Up</button>
+            <button type="submit" disabled={isLoading}>
+                Sign Up
+            </button>
         </form>
     )
 }
