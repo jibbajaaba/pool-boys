@@ -70,9 +70,10 @@ export const PoolBoysApi = createApi({
             invalidatesTags: ['Pools']
         }),
         updatePool: builder.mutation({
-            query: (pool_id) => ({
+            query: ({ pool_id, ...body }) => ({
                 url: `/api/pools/${pool_id}`,
-                method: 'PUT'
+                method: 'PUT',
+                body,
             }),
             invalidatesTags: ['Pools']
         }),
