@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGetAllPoolsQuery } from '../app/apiSlice';
 
-const PoolsList = () => {
+const ProfilePage = () => {
     const { data: pools, isLoading, error } = useGetAllPoolsQuery();
 
     if (isLoading) return <div className="text-center py-10">Loading pools...</div>;
@@ -29,4 +29,4 @@ const PoolsList = () => {
     );
 };
 
-export default PoolsList;
+export default ProfilePage;

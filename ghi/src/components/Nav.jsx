@@ -48,13 +48,8 @@ const Nav = () => {
             {user && (
               <>
                 <li>
-                  <NavLink to="/" className="bg-copper text-primary py-2 px-4 rounded shadow hover:bg-hippie hover:text-melon transition duration-300">
+                  <NavLink to="/profile" className="bg-copper text-primary py-2 px-4 rounded shadow hover:bg-hippie hover:text-melon transition duration-300">
                     My Profile
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/pools" className="bg-copper text-primary py-2 px-4 rounded shadow hover:bg-hippie hover:text-melon transition duration-300">
-                    Pools
                   </NavLink>
                 </li>
                 <li>

@@ -6,7 +6,7 @@ import { store } from './app/store'
 import { Provider } from 'react-redux'
 
 import Home from './components/Home'
-import PoolsList from './components/PoolsList'
+import ProfilePage from './components/ProfilePage'
 import SignInForm from './components/SignInForm'
 import SignUpForm from './components/SignUpForm'
 import CreatePoolForm from './components/CreatePoolForm'
@@ -39,8 +39,8 @@ const router = createBrowserRouter(
                     element: <SignInForm />,
                 },
                 {
-                    path: 'pools',
-                    element: <PoolsList />,
+                    path: 'profile',
+                    element: <ProfilePage />,
                 },
                 {
                     path: 'pools/create',
