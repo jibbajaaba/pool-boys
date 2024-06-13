@@ -22,10 +22,14 @@ if (!API_HOST) {
 function App() {
 
     return (
-        <div className="App">
+        <div className="flex">
             <Nav />
             <Outlet />
         </div>
+        // <div className="App">
+        //     <Nav />
+        //     <Outlet />
+        // </div>
     )
 }
 
