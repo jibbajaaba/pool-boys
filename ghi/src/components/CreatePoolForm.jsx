@@ -54,67 +54,83 @@ const CreatePoolForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Picture URL:</label>
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white shadow-md rounded mt-32">
+            <div className="mb-4">
+                <label htmlFor="picture_url" className="block text-sm font-medium text-gray-700">Picture URL:</label>
                 <input
                     type="text"
                     name="picture_url"
+                    id="picture_url"
                     value={formData.picture_url}
                     onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                 />
             </div>
-            <div>
-                <label>Address:</label>
+            <div className="mb-4">
+                <label htmlFor="address" className="block text-sm font-medium text-gray-700">Address:</label>
                 <input
                     type="text"
                     name="address"
+                    id="address"
                     value={formData.address}
                     onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                 />
             </div>
-            <div>
-                <label>Description:</label>
+            <div className="mb-4">
+                <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description:</label>
                 <textarea
                     name="description"
+                    id="description"
                     value={formData.description}
                     onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                 />
             </div>
-            <div>
-                <label>Hourly Rate:</label>
+            <div className="mb-4">
+                <label htmlFor="hourly_rate" className="block text-sm font-medium text-gray-700">Hourly Rate:</label>
                 <input
                     type="number"
                     name="hourly_rate"
+                    id="hourly_rate"
                     value={formData.hourly_rate}
                     onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                 />
             </div>
-            <div>
-                <label>Number of Guests:</label>
+            <div className="mb-4">
+                <label htmlFor="number_guests" className="block text-sm font-medium text-gray-700">Number of Guests:</label>
                 <input
                     type="number"
                     name="number_guests"
+                    id="number_guests"
                     value={formData.number_guests}
                     onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                 />
             </div>
-            <div>
-                <label>Amenities:</label>
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">Amenities:</label>
                 {amenities.map((amenity) => (
-                    <div key={amenity.id}>
+                    <div key={amenity.id} className="flex items-center mb-2">
                         <input
                             type="checkbox"
                             name="amenities_ids"
                             value={amenity.id}
                             checked={formData.amenities_ids.includes(amenity.id)}
                             onChange={handleAmenitiesChange}
+                            className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
                         />
-                        {amenity.name}
+                        <span className="ml-2 text-gray-700">{amenity.name}</span>
                     </div>
                 ))}
             </div>
-            <button type="submit">Create Pool</button>
+            <button
+                type="submit"
+                className="w-full py-2 px-4 bg-primary text-white font-semibold rounded-md shadow hover:bg-hippie focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition duration-300"
+            >
+                Create Pool
+            </button>
         </form>
     );
 };
