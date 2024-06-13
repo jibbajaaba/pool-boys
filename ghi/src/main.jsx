@@ -14,6 +14,7 @@ import App from './App'
 
 
 import './index.css'
+import PoolDetails from './components/PoolDetails'
 
 const BASE_URL = import.meta.env.BASE_URL
 if (!BASE_URL) {
@@ -46,6 +47,10 @@ const router = createBrowserRouter(
                     path: 'pools/create',
                     element: <CreatePoolForm />,
                 },
+                {
+                    path: 'pools/details/:pool_id',
+                    element: <PoolDetails />,
+                }
             ],
         },
     ],
