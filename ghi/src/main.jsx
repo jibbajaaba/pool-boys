@@ -9,6 +9,7 @@ import Home from './components/Home'
 import PoolsList from './components/PoolsList'
 import SignInForm from './components/SignInForm'
 import SignUpForm from './components/SignUpForm'
+import CreatePoolForm from './components/CreatePoolForm'
 import App from './App'
 
 
@@ -40,6 +41,10 @@ const router = createBrowserRouter(
                 {
                     path: 'pools',
                     element: <PoolsList />,
+                },
+                {
+                    path: 'pools/create',
+                    element: <CreatePoolForm />,
                 },
             ],
         },
