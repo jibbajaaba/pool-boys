@@ -14,7 +14,7 @@ const Nav = () => {
 
   if (isLoading) return <div>Loading...</div>
   return (
-    <div className="sidebar" className="fixed top-0 left-0 h-screen w-19 m-0 flex flex-col bg-primary text-copper ">
+    <div className="fixed top-0 left-0 h-screen w-19 m-0 flex flex-col bg-primary text-copper ">
       <nav className="nav">
         <div className="logo">
           <img
