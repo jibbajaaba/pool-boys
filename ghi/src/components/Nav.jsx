@@ -17,11 +17,12 @@ const Nav = () => {
   return (
     <div>
       <nav>
-        <div>
+        <div className="size-20 ...">
         <img
           src="/PoolBoys_Logo.png"
           alt="PoolBoys Logo"
         />
+        <div/>
           <div>
             <NavLink to="/">
               PoolBoys
