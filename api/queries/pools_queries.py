@@ -106,7 +106,6 @@ class PoolQueries:
     def delete_pool(
         self,
         pool_id: int,
-        poolowner_id: int
     ) -> PoolOut:
         try:
             with pool.connection() as conn:
@@ -114,9 +113,9 @@ class PoolQueries:
                     result = cur.execute(
                         """
                             DELETE FROM pools
-                            WHERE id = %s AND poolowner_id = %s
+                            WHERE id = %s
                             """,
-                        [pool_id, poolowner_id],
+                        [pool_id],
                     )
                 if not result:
                     return {"success": False, "message": "Pool not found"}

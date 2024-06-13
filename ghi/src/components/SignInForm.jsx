@@ -24,7 +24,7 @@ export default function SignInForm() {
     }
 
     return (
-        <form onSubmit={handleFormSubmit} className="max-w-md mx-auto p-6 bg-white shadow-md rounded mt-20">
+        <form onSubmit={handleFormSubmit} className="max-w-md mx-auto p-6 bg-white shadow-md rounded mt-32">
             {signinStatus.error && <div className="text-red-500 mb-4">{signinStatus.error.message}</div>}
 
             <div className="mb-4">

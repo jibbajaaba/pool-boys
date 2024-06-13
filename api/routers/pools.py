@@ -66,12 +66,11 @@ def get_pools_details(
 @router.delete("/api/pools/{pool_id}")
 def delete_pool(
     pool_id: int,
-    poolowner_id: int,
     user: UserResponse = Depends(try_get_jwt_user_data),
     queries: PoolQueries = Depends(),
     pool_amenities_queries: PoolAmenitiesQueries = Depends()
 ):
-    if not poolowner_id:
+    if not user:
         raise HTTPException(
             status_code=404, detail="You are not the pool owner"
         )
@@ -85,8 +84,7 @@ def delete_pool(
             )
     return {
         "success": queries.delete_pool(
-            pool_id=pool_id,
-            poolowner_id=user.id
+            pool_id=pool_id
             )
     }
 
