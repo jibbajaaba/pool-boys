@@ -56,11 +56,15 @@ const UpdatePoolForm = () => {
         });
     };
 
-    const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Submitting form data:', formData);
+
         try {
-            await updatePool({ poolId, ...formData }).unwrap();
+            const updatedData = { poolId, ...formData };
+            console.log('Data to be submitted:', updatedData);
+
+            await updatePool({ pool_id: poolId, ...formData }).unwrap();
             alert('Pool updated successfully!');
             navigate('/profile');
         } catch (err) {
@@ -68,6 +72,7 @@ const UpdatePoolForm = () => {
             alert('Failed to update pool');
         }
     };
+
 
     if (poolLoading || amenitiesLoading) return <div>Loading pool details...</div>;
     if (poolError) return <div>Error loading pool details: {poolError.message}</div>;
