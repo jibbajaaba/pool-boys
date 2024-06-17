@@ -22,6 +22,7 @@ def get_my_pools(
     pools = queries.get_all_pools_by_poolowner_id(poolowner_id=user.id)
     return pools
 
+
 @router.post("/api/pools", response_model=PoolOut)
 def create_pools(
     new_pool: PoolIn,
