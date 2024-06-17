@@ -26,7 +26,7 @@ export default function SignInForm() {
     }
 
     if (signinStatus.isSuccess) {
-        return <Navigate to="/profiles" />
+        return <Navigate to="/profile" />
     }
 
     return (
