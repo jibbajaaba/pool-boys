@@ -19,7 +19,7 @@ def get_my_pools(
         raise HTTPException(
             status_code=401, detail="Must be logged in to see your pools"
         )
-    pools = queries.get_all_by_poolowner_id(poolowner_id=user.id)
+    pools = queries.get_all_pools_by_poolowner_id(poolowner_id=user.id)
     return pools
 
 @router.post("/api/pools", response_model=PoolOut)

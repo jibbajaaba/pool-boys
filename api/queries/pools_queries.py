@@ -163,7 +163,7 @@ class PoolQueries:
         except psycopg.Error:
             raise PoolsDatabaseException("Could not update pool")
 
-    def get_all_by_poolowner_id(
+    def get_all_pools_by_poolowner_id(
             self, poolowner_id: int
             ) -> Optional[PoolOut]:
         """
