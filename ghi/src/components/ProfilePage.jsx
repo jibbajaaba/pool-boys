@@ -1,6 +1,6 @@
 import React from 'react';
 import { useGetAllPoolsQuery, useDeletePoolMutation } from '../app/apiSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const ProfilePage = () => {
     const { data: pools, isLoading, error } = useGetAllPoolsQuery();
@@ -31,11 +31,13 @@ const ProfilePage = () => {
                 {pools && pools.length > 0 ? (
                     pools.map(pool => (
                         <li key={pool.id} className="border rounded-lg shadow-md p-4 bg-white">
+                            <Link to={`/pools/details/${pool.id}`}>
                             <img
                                 src={pool.picture_url}
                                 alt="Pool"
                                 className="w-full h-48 object-cover rounded-t-lg"
                             />
+                            </Link>
                             <div className="mt-2">
                                 <div className="text-lg font-semibold text-gray-700">{pool.address}</div>
                                 <div className="text-gray-600">Hourly Rate: ${pool.hourly_rate}</div>
