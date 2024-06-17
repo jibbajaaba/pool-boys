@@ -129,6 +129,8 @@ async def authenticate(
     This can be used in your frontend to determine if a user
     is logged in or not
     """
+    if user is None:
+        return None
 
     user_details = queries.get_by_id(user.id)
     return user_details

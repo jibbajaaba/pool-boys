@@ -1,9 +1,10 @@
 import React from 'react';
-import { useGetAllPoolsQuery, useDeletePoolMutation } from '../app/apiSlice';
+import { useGetAllPoolsbyUsernameQuery, useDeletePoolMutation, useGetUserQuery } from '../app/apiSlice';
 import { useNavigate, Link } from 'react-router-dom';
 
 const ProfilePage = () => {
-    const { data: pools, isLoading, error } = useGetAllPoolsQuery();
+    const { data: user } = useGetUserQuery();
+    const { data: pools, isLoading, error } = useGetAllPoolsbyUsernameQuery();
     const [deletePool] = useDeletePoolMutation();
     const navigate = useNavigate();
 

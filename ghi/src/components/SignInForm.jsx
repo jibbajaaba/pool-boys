@@ -1,26 +1,32 @@
 // @ts-check
 import { useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { useSigninUserMutation } from '../app/apiSlice';
 
 export default function SignInForm() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [signin, signinStatus] = useSigninUserMutation()
+    const navigate = useNavigate()
 
     /**
      * @param {React.FormEvent<HTMLFormElement>} e
      */
     async function handleFormSubmit(e) {
         e.preventDefault()
-        signin({
-            username: username,
-            password: password
-        })
+        try {
+            await signin({
+                username: username,
+                password: password,
+            }).unwrap()
+            navigate('/profile')
+        } catch (error) {
+            console.error('Failed to signin:', error)
+        }
     }
 
     if (signinStatus.isSuccess) {
-        return <Navigate to="/" />
+        return <Navigate to="/profiles" />
     }
 
     return (
