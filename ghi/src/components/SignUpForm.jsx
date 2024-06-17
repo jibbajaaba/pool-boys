@@ -1,5 +1,6 @@
 // @ts-check
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSignupUserMutation } from '../app/apiSlice';
 
 export default function SignUpForm() {
@@ -11,13 +12,14 @@ export default function SignUpForm() {
     const [phone_number, setPhoneNumber] = useState('');
     const [age, setAge] = useState('');
     const [signup, { isLoading, error }] = useSignupUserMutation();
-
+    const navigate = useNavigate();
     /**
      * @param {React.FormEvent<HTMLFormElement>} e
      */
     async function handleFormSubmit(e) {
         e.preventDefault();
-        signup({
+        try {
+            await signup({
             username,
             password,
             first_name,
@@ -25,8 +27,13 @@ export default function SignUpForm() {
             email,
             phone_number,
             age,
-        });
+        }).unwrap();
+            navigate('/pools/create');
+        } catch (error) {
+            console.error('Failed to signup:', error);
+        }
     }
+
 
     return (
         <form onSubmit={handleFormSubmit} className="max-w-md mx-auto p-6 bg-white shadow-md rounded mt-32">
