@@ -51,7 +51,7 @@ const router = createBrowserRouter(
                 {
                     path: 'pools/details/:pool_id',
                     element: <PoolDetails />,
-                }
+                },
                 {
                     path: 'pools/update/:pool_id',
                     element: <UpdatePoolForm />

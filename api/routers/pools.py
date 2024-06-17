@@ -1,4 +1,3 @@
-
 from fastapi import Depends, APIRouter, HTTPException
 from models.pools import PoolIn, PoolOut, PoolOutWithAmenityIds
 from models.users import UserResponse
@@ -10,6 +9,18 @@ from queries.amenity_queries import AmenitiesQueries
 
 router = APIRouter()
 
+
+@router.get("/api/pools/mine", response_model=list[PoolOut])
+def get_my_pools(
+    user: UserResponse = Depends(try_get_jwt_user_data),
+    queries: PoolQueries = Depends()
+):
+    if not user:
+        raise HTTPException(
+            status_code=401, detail="Must be logged in to see your pools"
+        )
+    pools = queries.get_all_by_poolowner_id(poolowner_id=user.id)
+    return pools
 
 @router.post("/api/pools", response_model=PoolOut)
 def create_pools(

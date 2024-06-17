@@ -162,3 +162,30 @@ class PoolQueries:
                     **pool_dict)
         except psycopg.Error:
             raise PoolsDatabaseException("Could not update pool")
+
+    def get_all_by_poolowner_id(
+            self, poolowner_id: int
+            ) -> Optional[PoolOut]:
+        """
+        Gets a pool from the database by poolowner_id
+
+        Returns None if the pool isn't found
+        """
+        try:
+            with pool.connection() as conn:
+                with conn.cursor(row_factory=class_row(PoolOut)) as cur:
+                    cur.execute(
+                        """
+                            SELECT
+                                *
+                            FROM pools
+                            WHERE poolowner_id = %s
+                            """,
+                        [poolowner_id],
+                    )
+                    pools = cur.fetchall()
+        except psycopg.Error as e:
+            print(e)
+            raise UserDatabaseException(f"Error getting user with \
+                                        {poolowner_id}")
+        return pools
