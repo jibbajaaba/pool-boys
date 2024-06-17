@@ -54,8 +54,8 @@ const router = createBrowserRouter(
                 },
                 {
                     path: 'pools/update/:pool_id',
-                    element: <UpdatePoolForm />
-                }
+                    element: <UpdatePoolForm />,
+                },
             ],
         },
     ],
