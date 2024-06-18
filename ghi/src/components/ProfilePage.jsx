@@ -27,7 +27,7 @@ const ProfilePage = () => {
     };
 
     return (
-        <div className="pt-28 bg-lagoon min-h-screen p-6">
+        <div className="pt-28 bg-lagoon min-h-screen p-6 mx-auto my-auto">
             {user && (
                 <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md mb-6">
                     <h1 className="text-3xl font-bold text-copper mb-6">Welcome, {user.first_name}!</h1>

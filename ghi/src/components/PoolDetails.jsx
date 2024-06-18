@@ -21,7 +21,7 @@ const PoolDetails = () => {
   if (amError) return <p className="text-center py-10 text-green-700">Error Loading Amenities: {error.message}</p>;
 
   return (
-    <div className="pt-28 bg-lagoon min-h-screen p-6 flex items-center justify-center">
+    <div className="pt-28 bg-lagoon min-h-screen p-6 flex items-center justify-center mx-auto my-auto">
       <div className="max-w-5xl bg-white p-6 rounded-lg shadow-md w-full">
         <div className="image-container mb-6">
           <img src={pool?.picture_url} alt="Pool" />
