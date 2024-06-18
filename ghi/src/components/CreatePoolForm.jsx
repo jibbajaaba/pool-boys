@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useGetAllAmenitiesQuery, useCreatePoolMutation } from '../app/apiSlice';
+import { useNavigate } from 'react-router-dom';
 
 const CreatePoolForm = () => {
     const { data: amenities, isLoading: isLoadingAmenities } = useGetAllAmenitiesQuery();
     const [createPool] = useCreatePoolMutation();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         picture_url: '',
         address: '',
@@ -41,8 +43,9 @@ const CreatePoolForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await createPool(formData).unwrap();
+            const createdPool = await createPool(formData).unwrap();
             alert('Pool created successfully!');
+            navigate(`/pools/details/${createdPool.id}`);
         } catch (err) {
             console.error('Failed to create pool:', err);
             alert('Failed to create pool');
@@ -136,3 +139,4 @@ const CreatePoolForm = () => {
 };
 
 export default CreatePoolForm;
+
