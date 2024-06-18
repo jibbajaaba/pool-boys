@@ -56,6 +56,12 @@ export const PoolBoysApi = createApi({
             }),
             providesTags: ['Pools']
         }),
+        getAllPoolsbyUsername: builder.query({
+            query: () => ({
+                url:'/api/pools/mine',
+            }),
+            providesTags: ['Pools']
+        }),
         getPoolDetails: builder.query({
             query: (pool_id) => ({
                 url: `api/pools/${pool_id}`
@@ -101,6 +107,7 @@ export const PoolBoysApi = createApi({
 export const {
     useGetAllAmenitiesQuery,
     useGetAmenityQuery,
+    useGetAllPoolsbyUsernameQuery,
     useGetAllReservationsByPoolIdQuery,
     useGetUserQuery,
     useSignoutUserMutation,
