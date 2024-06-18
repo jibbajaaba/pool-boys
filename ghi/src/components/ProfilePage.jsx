@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGetAllPoolsbyUsernameQuery, useDeletePoolMutation, useGetUserQuery } from '../app/apiSlice';
 import { useNavigate, Link } from 'react-router-dom';
-import '../App.css'; 
+
 
 const ProfilePage = () => {
     const { data: user, isLoading: userLoading } = useGetUserQuery();
