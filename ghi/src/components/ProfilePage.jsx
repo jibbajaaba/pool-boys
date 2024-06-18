@@ -12,7 +12,6 @@ const ProfilePage = () => {
     if (userLoading) return <div className="text-center py-10">Loading user...</div>;
     if (isLoading) return <div className="text-center py-10">Loading pools...</div>;
     if (error) return <div className="text-center py-10 text-red-500">Error loading pools: {error.message}</div>;
-
     const handleDelete = async (poolId) => {
         try {
             await deletePool(poolId).unwrap();
@@ -81,7 +80,7 @@ const ProfilePage = () => {
                 </ul>
             </div>
         </div>
-    );
+    )
 };
 
 export default ProfilePage;
