@@ -7,7 +7,10 @@ body {
     font-family: 'Rammetto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #B2EBE0; /* lagoon */
+    background-image: url('https://wallpapers.com/images/hd/pool-water-background-2936-x-1960-d3gscq2bkixwnm2p.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .text-primary {
@@ -44,7 +47,7 @@ nav {
     display: flex;
     flex-direction: row;
     height: 4rem;
-    background-color: #38908F; /* primary */
+    background-color: #1FBFB5; /* primary */
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;

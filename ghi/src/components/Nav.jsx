@@ -17,7 +17,7 @@ const Nav = () => {
 
 
   return (
-    <div className="bg-primary text-copper fixed top-0 left-0 right-0 z-10">
+    <div className="bg-lagoon text-copper fixed top-0 left-0 right-0 z-10">
       <nav className="flex items-center justify-between p-4">
         <div className="flex items-center">
           <NavLink to="/" className="logo cursor-pointer">

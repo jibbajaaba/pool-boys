@@ -12,7 +12,7 @@ const Home = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 4000,
+        autoplaySpeed: 5000,
         centerMode: true,
         centerPadding: '0',
     };
@@ -25,7 +25,7 @@ const Home = () => {
     ];
 
     return (
-        <div className="pt-28 flex flex-col items-center justify-center min-h-screen bg-lagoon p-4 overflow-hidden w-full">
+        <div className="pt-28 flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden w-full">
             <div className="max-w-3xl mb-8">
                 <Slider {...settings}>
                     {images.map((url, index) => (
