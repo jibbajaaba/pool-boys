@@ -19,18 +19,20 @@ const Nav = () => {
   return (
     <div className="bg-primary text-copper fixed top-0 left-0 right-0 z-10">
       <nav className="flex items-center justify-between p-4">
-        <div className="logo cursor-pointer">
-          <NavLink to={`/`}>
-          <img
-            src="/PoolBoys_Logo.png"
-            alt="PoolBoys Logo"
-            className="w-16 h-16"
-          />
+        <div className="flex items-center">
+          <NavLink to="/" className="logo cursor-pointer">
+            <img
+              src="/PoolBoys_Logo.png"
+              alt="PoolBoys Logo"
+              className="w-16 h-16"
+            />
+          </NavLink>
+          <NavLink to="/" className="text-melon hover:text-hippie ml-4 text-lg font-bold">
+            PoolBoys
           </NavLink>
         </div>
-        <div className="nav-links flex space-x-4">
-          <NavLink to="/" className="text-melon hover:text-hippie">PoolBoys</NavLink>
-          <ul className="flex space-x-4">
+        <div className="flex items-center space-x-4">
+          <ul className="flex space-x-4 items-center">
             {!user && (
               <>
                 <li>
@@ -68,7 +70,7 @@ const Nav = () => {
         </div>
       </nav>
     </div>
-  )
-}
+  );
+};
 
 export default Nav
