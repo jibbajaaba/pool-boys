@@ -1,0 +1,200 @@
+@font-face {
+    font-family: 'Rammetto';
+    src: url('./fonts/Rammetto_One/RammettoOne-Regular.ttf');
+}
+
+body {
+    font-family: 'Rammetto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #B2EBE0; /* lagoon */
+}
+
+.profile-avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.profile-details h2 {
+    color: #38908F; /* primary */
+    font-size: 1.5rem;
+}
+
+.profile-details p {
+    color: #E08963; /* copper */
+    margin-bottom: 0.5rem;
+}
+
+.text-primary {
+    color: #38908F; /* primary */
+}
+
+.text-copper {
+    color: #E08963; /* copper */
+}
+
+.bg-primary {
+    background-color: #38908F; /* primary */
+}
+
+.bg-copper {
+    background-color: #E08963; /* copper */
+}
+
+.bg-lagoon {
+    background-color: #B2EBE0; /* lagoon */
+}
+
+.hover\\:bg-hippie:hover {
+    background-color: #5E96AE; /* hippie */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    height: 4rem;
+    background-color: #38908F; /* primary */
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.custom-container-nav {
+    width: 50rem;
+}
+
+.nav-bar-font {
+    color: #FFBFA3; /* melon */
+    font-family: 'Rammetto', sans-serif;
+}
+
+.logo img {
+    width: 3rem;
+    height: 3rem;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-links a {
+    color: #FFBFA3; /* melon */
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.nav-links a:hover {
+    color: #5E96AE; /* hippie */
+}
+
+.main-section {
+    display: flex;
+    flex-direction: column;
+    background-color: #B2EBE0; /* lagoon */
+    padding: 2rem;
+}
+
+.custom-header {
+    font-size: 2rem;
+    color: #38908F; /* primary */
+}
+
+.pool-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: #E08963; /* copper */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.pool-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.pool-card .details {
+    margin-top: 1rem;
+}
+
+.pool-card .details .hourly-rate {
+    color: #38908F; /* primary */
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.button-container button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.button-container .update-button {
+    background-color: #5E96AE; /* hippie */
+}
+
+.button-container .delete-button {
+    background-color: #E08963; /* copper */
+}
+
+.image-container {
+    position: relative;
+    min-height: 15rem;
+}
+
+.modal-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFFFFF;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.export-button {
+    background-color: #5E96AE; /* hippie */
+    color: #FFFFFF;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

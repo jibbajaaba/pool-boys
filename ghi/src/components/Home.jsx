@@ -1,7 +1,7 @@
-import React from 'react'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import '../App.css';
 
 const Home = () => {
@@ -12,20 +12,20 @@ const Home = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 3000,
+        autoplaySpeed: 4000,
         centerMode: true,
         centerPadding: '0',
-    }
+    };
 
     const images = [
         'https://64.media.tumblr.com/1f201c639c45924de31231614ce2ef3e/tumblr_nnzq6ms4UY1qczwklo8_1280.jpg',
         'https://i.ytimg.com/vi/TOm4NiBlUrI/maxresdefault.jpg',
         'https://img.delicious.com.au/DAsUqhzz/del/2018/05/laucala-island-laucala-fiji-79624-2.jpg',
         // Add more image URLs here
-    ]
+    ];
 
     return (
-        <div className="pt-28 flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4 overflow-hidden w-full">
+        <div className="pt-28 flex flex-col items-center justify-center min-h-screen bg-lagoon p-4 overflow-hidden w-full">
             <div className="max-w-3xl mb-8">
                 <Slider {...settings}>
                     {images.map((url, index) => (
@@ -39,17 +39,17 @@ const Home = () => {
                     ))}
                 </Slider>
             </div>
-            <div className="text-center max-w-xl">
+            <div className="text-center max-w-xl bg-white p-6 rounded-lg shadow-md mb-8">
                 <h1 className="text-4xl font-bold mb-4 text-primary">
                     Welcome to PoolBoys
                 </h1>
-                <p className="text-lg mb-8">
+                <p className="text-lg mb-8 text-gray-700">
                     You could make $10k a summer with PoolBoys. 10,000 customers
-                    have used us and they agree too.
+                    have used us and they agree too. 
                 </p>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;

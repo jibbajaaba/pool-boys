@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGetAllPoolsbyUsernameQuery, useDeletePoolMutation, useGetUserQuery } from '../app/apiSlice';
 import { useNavigate, Link } from 'react-router-dom';
-
+import "../App.css"
 
 const ProfilePage = () => {
     const { data: user, isLoading: userLoading } = useGetUserQuery();
@@ -28,53 +28,58 @@ const ProfilePage = () => {
     };
 
     return (
-        <div className="p-4 mt-24">
+        <div className="pt-28 bg-lagoon min-h-screen p-6">
             {user && (
-                <div className="mb-8 profile-details">
-                    <div>
-                        <h2 className="text-2xl font-bold text-primary">{user.name}</h2>
-                        <p className="text-gray-600">{user.email}</p>
-                        <p className="text-gray-600">{user.username}</p>
-                        <p className="text-gray-600">{user.phone_number}</p>
+                <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md mb-6">
+                    <h1 className="text-3xl font-bold text-copper mb-6">Welcome, {user.first_name}!</h1>
+                    <div className="border rounded-lg shadow-md p-6 bg-primary box-border w-full">
+                        <h2 className="text-2xl font-bold text-white mb-4">Account Details</h2>
+                        <p className="text-white font-bold mb-2">{user.first_name} {user.last_name}</p>
+                        <p className="text-white mb-2">{user.email}</p>
+                        <p className="text-white mb-2">{user.username}</p>
+                        <p className="text-white">{user.phone_number}</p>
                     </div>
                 </div>
             )}
-            <h2 className="text-2xl font-bold mb-4 text-primary">Pool List</h2>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {pools && pools.length > 0 ? (
-                    pools.map(pool => (
-                        <li key={pool.id} className="border rounded-lg shadow-md p-4 bg-white">
-                            <Link to={`/pools/details/${pool.id}`}>
-                            <img
-                                src={pool.picture_url}
-                                alt="Pool"
-                                className="w-full h-48 object-cover rounded-t-lg"
-                            />
-                            </Link>
-                            <div className="mt-2">
-                                <div className="text-lg font-semibold text-gray-700">{pool.address}</div>
-                                <div className="text-gray-600">Hourly Rate: ${pool.hourly_rate}</div>
-                            </div>
-                            <div className="mt-4 flex justify-between">
-                                <button
-                                    onClick={() => handleUpdate(pool.id)}
-                                    className="px-4 py-2 bg-primary text-white font-semibold rounded-md shadow hover:bg-hippie focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition duration-300"
-                                >
-                                    Update
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(pool.id)}
-                                    className="px-4 py-2 bg-red-500 text-white font-semibold rounded-md shadow hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-300"
-                                >
-                                    Delete
-                                </button>
-                            </div>
-                        </li>
-                    ))
-                ) : (
-                    <div className="col-span-full text-center text-gray-500">No pools available.</div>
-                )}
-            </ul>
+
+            <h2 className="text-2xl font-bold text-copper mb-4">Pool List</h2>
+            <div className="max-w-5xl mx-auto">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {pools && pools.length > 0 ? (
+                        pools.map(pool => (
+                            <li key={pool.id} className="border rounded-lg shadow-md overflow-hidden bg-white hover:shadow-lg transition-shadow duration-300">
+                                <Link to={`/pools/details/${pool.id}`}>
+                                    <img
+                                        src={pool.picture_url}
+                                        alt="Pool"
+                                        className="w-full h-48 object-cover"
+                                    />
+                                </Link>
+                                <div className="p-4">
+                                    <div className="text-lg font-semibold text-primary mb-2">{pool.address}</div>
+                                    <div className="text-gray-600 mb-4">Hourly Rate: ${pool.hourly_rate}</div>
+                                    <div className="flex justify-between">
+                                        <button
+                                            onClick={() => handleUpdate(pool.id)}
+                                            className="px-4 py-2 bg-primary text-white font-semibold rounded-md shadow hover:bg-hippie focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition duration-300"
+                                        >
+                                            Update
+                                        </button>
+                                        <button
+                                            onClick={() => handleDelete(pool.id)}
+                                            className="px-4 py-2 bg-copper text-white font-semibold rounded-md shadow hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-300"
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        ))
+                    ) : (
+                        <div className="col-span-full text-center text-gray-500">No pools available.</div>
+                    )}
+                </ul>
+            </div>
         </div>
     );
 };
