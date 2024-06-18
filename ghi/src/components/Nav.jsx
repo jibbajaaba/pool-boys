@@ -1,16 +1,17 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { useGetUserQuery, useSignoutUserMutation } from "../app/apiSlice"
 import { useEffect } from "react"
 
 const Nav = () => {
   const { data: user, isLoading } = useGetUserQuery()
   const [signOut, signOutStatus] = useSignoutUserMutation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (signOutStatus.isSuccess) {
-      window.location.reload()
+      navigate('/');
     }
-  }, [signOutStatus.isSuccess])
+  }, [signOutStatus.isSuccess, navigate]);
 
   if (isLoading) return <div>Loading...</div>
 
