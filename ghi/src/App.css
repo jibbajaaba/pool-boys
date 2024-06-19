@@ -147,14 +147,14 @@ nav {
 
 .image-container {
     width: 100%;
-    height: 40vh; 
+    height: 40vh;
     overflow: hidden;
     border-radius: 8px;
 }
 
 .image-container {
     width: 100%;
-    height: 50vh; 
+    height: 50vh;
     overflow: hidden;
     border-radius: 8px;
 }
@@ -177,7 +177,7 @@ nav {
     border-radius: 8px;
     padding: 2rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%; 
+    width: 100%;
     max-width: 1200px;
 }
 
@@ -202,4 +202,30 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+footer {
+    background-color: #B2EBE0; /* lagoon */
+    color: #E08963; /* copper */
+    padding: 1rem 0;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #38908F; /* primary */
+}
+
+footer .flex {
+    display: flex;
+    gap: 1rem;
 }
