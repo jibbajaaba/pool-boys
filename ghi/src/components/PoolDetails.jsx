@@ -39,12 +39,13 @@ const PoolDetails = () => {
         backgroundImage: "url('https://img.freepik.com/premium-photo/surface-green-swimming-pool-texture-background_55716-2249.jpg?w=1380')",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center"
+        backgroundPosition: "center center",
+        paddingTop: "6rem", // Add padding at the top to show the full image
       }}
     >
       <div className="max-w-5xl bg-white p-6 rounded-lg shadow-md w-full">
         <div className="image-container mb-6">
-          <img src={pool?.picture_url} alt="Pool" />
+          <img src={pool?.picture_url} alt="Pool" className="w-full h-64 object-cover rounded-lg" /> {/* Ensure consistent image size */}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="pool-details mb-6">
@@ -98,5 +99,3 @@ const PoolDetails = () => {
 };
 
 export default PoolDetails;
-
-
