@@ -33,7 +33,15 @@ const PoolDetails = () => {
   };
 
   return (
-    <div className="pt-28 bg-lagoon min-h-screen p-6 flex items-center justify-center mx-auto my-auto">
+    <div
+      className="min-h-screen w-full flex items-center justify-center p-6"
+      style={{
+        backgroundImage: "url('https://img.freepik.com/premium-photo/surface-green-swimming-pool-texture-background_55716-2249.jpg?w=1380')",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center center"
+      }}
+    >
       <div className="max-w-5xl bg-white p-6 rounded-lg shadow-md w-full">
         <div className="image-container mb-6">
           <img src={pool?.picture_url} alt="Pool" />
@@ -90,4 +98,5 @@ const PoolDetails = () => {
 };
 
 export default PoolDetails;
+
 
