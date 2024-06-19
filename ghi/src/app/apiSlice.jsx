@@ -89,6 +89,22 @@ export const PoolBoysApi = createApi({
             }),
             providesTags: [{type: 'Reservations', pool_id: 'LIST'}]
         }),
+        // 
+        createReservation: builder.mutation({
+            query: (body) => ({
+                url: '/api/reservations',
+                method: 'POST',
+                body,
+            }),
+            invalidatesTags: ['Reservations']
+        }),
+        getAllReservationsByUser: builder.query({
+            query: () => ({
+                url: '/api/reservations/mine',
+            }),
+            providesTags: ['Reservations']
+        }),
+        // 
         getAllAmenities: builder.query({
             query: () => ({
                 url: '/api/amenities'
@@ -117,5 +133,7 @@ export const {
     useGetAllPoolsQuery,
     useGetPoolDetailsQuery,
     useDeletePoolMutation,
-    useUpdatePoolMutation
+    useUpdatePoolMutation,
+    useCreateReservationMutation,
+    useGetAllReservationsByUserQuery
 } = PoolBoysApi
