@@ -28,8 +28,15 @@ const Nav = () => {
               />
             </NavLink>
           </div>
-          <NavLink to="/" className="text-melon hover:text-hippie ml-4 text-2xl font-bold">
-            PoolBoys
+          <NavLink to="/" className="ml-4 text-4xl font-bold" style={{ fontFamily: 'Concert One, sans-serif' }}>
+            <span style={{ color: '#38908F' }}>P</span>
+            <span style={{ color: '#E08963' }}>o</span>
+            <span style={{ color: '#5E96AE' }}>o</span>
+            <span style={{ color: '#B2EBE0' }}>l</span>
+            <span style={{ color: '#FFBFA3' }}>B</span>
+            <span style={{ color: '#38908F' }}>o</span>
+            <span style={{ color: '#E08963' }}>y</span>
+            <span style={{ color: '#5E96AE' }}>s</span>
           </NavLink>
         </div>
         <div className="flex items-center space-x-4">
