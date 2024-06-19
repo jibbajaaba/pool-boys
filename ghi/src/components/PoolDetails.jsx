@@ -1,12 +1,13 @@
-import { useGetAllAmenitiesQuery, useGetAllReservationsByPoolIdQuery, useGetPoolDetailsQuery } from '../app/apiSlice';
+import { useGetAllAmenitiesQuery, useGetAllReservationsByPoolIdQuery, useGetPoolDetailsQuery, useDeleteReservationMutation } from '../app/apiSlice';
 import { useParams } from 'react-router-dom';
 import '../App.css';
 
 const PoolDetails = () => {
   const params = useParams();
   const { data: pool, isLoading, error } = useGetPoolDetailsQuery(params.pool_id);
-  const { data: reservations, isLoading: resLoading, error: resError } = useGetAllReservationsByPoolIdQuery(params.pool_id);
+  const { data: reservations, isLoading: resLoading, error: resError, refetch } = useGetAllReservationsByPoolIdQuery(params.pool_id);
   const { data: allAmenities, isLoading: amLoading, error: amError } = useGetAllAmenitiesQuery();
+  const [deleteReservation] = useDeleteReservationMutation();
 
   if (reservations === null) {
     return "No Reservations made";
@@ -19,6 +20,17 @@ const PoolDetails = () => {
   if (resLoading) return <p className="text-center py-10">Loading reservations...</p>;
   if (amLoading) return <p className="text-center py-10">Loading amenities...</p>;
   if (amError) return <p className="text-center py-10 text-green-700">Error Loading Amenities: {error.message}</p>;
+
+  const handleDeleteReservation = async (reservationId) => {
+    try {
+      await deleteReservation(reservationId).unwrap();
+      refetch();
+      alert('Reservation deleted successfully!');
+    } catch (err) {
+      console.error('Failed to delete reservation:', err);
+      alert('Failed to delete reservation');
+    }
+  };
 
   return (
     <div className="pt-28 bg-lagoon min-h-screen p-6 flex items-center justify-center mx-auto my-auto">
@@ -47,6 +59,7 @@ const PoolDetails = () => {
                   <tr>
                     <th className="px-4 py-2 border-b">Start Time</th>
                     <th className="px-4 py-2 border-b">End Time</th>
+                    <th className="px-4 py-2 border-b">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -54,6 +67,14 @@ const PoolDetails = () => {
                     <tr key={reservation.id}>
                       <td className="px-4 py-2 border-b">{new Date(reservation.start_time).toLocaleString()}</td>
                       <td className="px-4 py-2 border-b">{new Date(reservation.end_time).toLocaleString()}</td>
+                      <td className="px-4 py-2 border-b">
+                        <button
+                          onClick={() => handleDeleteReservation(reservation.id)}
+                          className="px-4 py-2 bg-copper text-white font-semibold rounded-md shadow hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-300"
+                        >
+                          Delete
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -69,3 +90,4 @@ const PoolDetails = () => {
 };
 
 export default PoolDetails;
+

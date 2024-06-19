@@ -117,6 +117,13 @@ export const PoolBoysApi = createApi({
             }),
             providesTags: (_result, _error, arg) => [{type: 'Amenities', id: arg}],
         }),
+        deleteReservation: builder.mutation({
+            query: (reservationId) => ({
+                url: `/api/reservations/${reservationId}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['Reservation']
+        }),
     })
 })
 
@@ -135,5 +142,6 @@ export const {
     useDeletePoolMutation,
     useUpdatePoolMutation,
     useCreateReservationMutation,
-    useGetAllReservationsByUserQuery
+    useGetAllReservationsByUserQuery,
+    useDeleteReservationMutation
 } = PoolBoysApi
