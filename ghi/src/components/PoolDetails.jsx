@@ -40,7 +40,7 @@ const PoolDetails = () => {
             </ul>
           </div>
           <div className="reservations">
-            <h3 className="text-2xl font-semibold text-primary mb-4">Reservations:</h3>
+            <h3 className="text-2xl font-semibold text-primary mb-4">Days Blocked from Renters:</h3>
             {reservations && reservations.length > 0 ? (
               <table className="min-w-full bg-white border border-gray-200">
                 <thead>
