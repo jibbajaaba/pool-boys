@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { useGetAllPoolsbyUsernameQuery, useDeletePoolMutation, useGetUserQuery, useCreateReservationMutation, useGetAllReservationsByUserQuery } from '../app/apiSlice';
+import { useGetAllPoolsbyUsernameQuery, useDeletePoolMutation, useGetUserQuery, useCreateReservationMutation } from '../app/apiSlice';
 import { useNavigate, Link } from 'react-router-dom';
 import "../App.css";
 
 const ProfilePage = () => {
     const { data: user, isLoading: userLoading } = useGetUserQuery();
     const { data: pools, isLoading, error } = useGetAllPoolsbyUsernameQuery();
-    const { data: reservations } = useGetAllReservationsByUserQuery();
     const [deletePool] = useDeletePoolMutation();
     const [createReservation] = useCreateReservationMutation();
     const navigate = useNavigate();

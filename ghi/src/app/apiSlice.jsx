@@ -8,7 +8,7 @@ export const PoolBoysApi = createApi({
     }),
     tagTypes: [
         'User',
-        'Pool',
+        'Pools',
         'Reservation',
         'Amenity'
     ],
@@ -40,7 +40,7 @@ export const PoolBoysApi = createApi({
                 method: 'POST',
                 body
             }),
-            providesTags: ['User']
+            invalidatesTags: ['User']
         }),
         getAllPools: builder.query({
             query: () => ({
@@ -54,7 +54,7 @@ export const PoolBoysApi = createApi({
                 method: 'POST',
                 body
             }),
-            providesTags: ['Pools']
+            invalidatesTags: ['Pools']
         }),
         getAllPoolsbyUsername: builder.query({
             query: () => ({
@@ -84,10 +84,10 @@ export const PoolBoysApi = createApi({
             invalidatesTags: ['Pools']
         }),
         getAllReservationsByPoolId: builder.query({
-            query: (pool_id) => ({
-                url: `/api/pools/${pool_id}/reservations`,
+            query: (id) => ({
+                url: `/api/pools/${id}/reservations`,
             }),
-            providesTags: [{type: 'Reservations', pool_id: 'LIST'}]
+            providesTags: [{type: 'Reservations', id: 'LIST'}]
         }),
         // 
         createReservation: builder.mutation({
@@ -98,13 +98,6 @@ export const PoolBoysApi = createApi({
             }),
             invalidatesTags: ['Reservations']
         }),
-        getAllReservationsByUser: builder.query({
-            query: () => ({
-                url: '/api/reservations/mine',
-            }),
-            providesTags: ['Reservations']
-        }),
-        // 
         getAllAmenities: builder.query({
             query: () => ({
                 url: '/api/amenities'
@@ -142,6 +135,5 @@ export const {
     useDeletePoolMutation,
     useUpdatePoolMutation,
     useCreateReservationMutation,
-    useGetAllReservationsByUserQuery,
     useDeleteReservationMutation
 } = PoolBoysApi
