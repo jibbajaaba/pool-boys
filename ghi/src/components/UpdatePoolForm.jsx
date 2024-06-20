@@ -92,7 +92,7 @@ const UpdatePoolForm = () => {
                 />
             </div>
             <div className="mb-4">
-                <label htmlFor="address" className="block text-sm font-medium text-gray-700">Address:</label>
+                <label htmlFor="address" className="block text-sm font-medium text-gray-700">City & State:</label>
                 <input
                     type="text"
                     name="address"
@@ -103,7 +103,7 @@ const UpdatePoolForm = () => {
                 />
             </div>
             <div className="mb-4">
-                <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description:</label>
+                <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description & Address:</label>
                 <input
                     name="description"
                     id="description"

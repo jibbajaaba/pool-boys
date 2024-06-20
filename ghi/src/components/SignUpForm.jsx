@@ -9,16 +9,19 @@ export default function SignUpForm() {
     const [first_name, setFirstName] = useState('');
     const [last_name, setLastName] = useState('');
     const [email, setEmail] = useState('');
-    const [phone_number, setPhoneNumber] = useState('');
+    const [areaCode, setAreaCode] = useState('');
+    const [centralOfficeCode, setCentralOfficeCode] = useState('');
+    const [lineNumber, setLineNumber] = useState('');
     const [age, setAge] = useState('');
     const [signup, { isLoading, error }] = useSignupUserMutation();
     const navigate = useNavigate();
-    
+
     /**
      * @param {React.FormEvent<HTMLFormElement>} e
      */
     async function handleFormSubmit(e) {
         e.preventDefault();
+        const phone_number = `${areaCode}-${centralOfficeCode}-${lineNumber}`;
         try {
             await signup({
                 username,
@@ -46,7 +49,6 @@ export default function SignUpForm() {
             }}
         >
             <form onSubmit={handleFormSubmit} className="max-w-md mx-auto p-6 bg-white shadow-md rounded">
-                {error && <div className="text-red-500 mb-4">{error.message}</div>}
 
                 <div className="mb-4">
                     <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
@@ -115,16 +117,40 @@ export default function SignUpForm() {
 
                 <div className="mb-4">
                     <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700">Phone Number</label>
-                    <input
-                        type="tel"
-                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                        name="phone_number"
-                        id="phone_number"
-                        value={phone_number}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                        placeholder="Enter Phone Number"
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
-                    />
+                    <div className="flex space-x-2">
+                        <input
+                            type="tel"
+                            name="areaCode"
+                            id="areaCode"
+                            value={areaCode}
+                            onChange={(e) => setAreaCode(e.target.value)}
+                            placeholder="123"
+                            pattern="[0-9]{3}"
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                        />
+                        <span className="mt-2">-</span>
+                        <input
+                            type="tel"
+                            name="centralOfficeCode"
+                            id="centralOfficeCode"
+                            value={centralOfficeCode}
+                            onChange={(e) => setCentralOfficeCode(e.target.value)}
+                            placeholder="456"
+                            pattern="[0-9]{3}"
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                        />
+                        <span className="mt-2">-</span>
+                        <input
+                            type="tel"
+                            name="lineNumber"
+                            id="lineNumber"
+                            value={lineNumber}
+                            onChange={(e) => setLineNumber(e.target.value)}
+                            placeholder="7890"
+                            pattern="[0-9]{4}"
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                        />
+                    </div>
                 </div>
 
                 <div className="mb-4">
@@ -149,5 +175,5 @@ export default function SignUpForm() {
                 </button>
             </form>
         </div>
-    )
+    );
 }
