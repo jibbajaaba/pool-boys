@@ -19,7 +19,6 @@ const Home = () => {
     };
 
     const images = [
-        'https://imageio.forbes.com/specials-images/imageserve/61014af0dd6a96c2285f098e/0x0.jpg?format=jpg&crop=2560,1440,x0,y346,safe&height=900&width=1600&fit=bounds',
         'https://i.ytimg.com/vi/TOm4NiBlUrI/maxresdefault.jpg',
         'https://img.delicious.com.au/DAsUqhzz/del/2018/05/laucala-island-laucala-fiji-79624-2.jpg',
         // Add more image URLs here

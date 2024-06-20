@@ -32,7 +32,7 @@ export const PoolBoysApi = createApi({
                 method: 'POST',
                 body
             }),
-            invalidatesTags: ['User']
+            invalidatesTags: ['User', 'Pools']
         }),
         signupUser: builder.mutation({
             query: (body) => ({
@@ -40,7 +40,7 @@ export const PoolBoysApi = createApi({
                 method: 'POST',
                 body
             }),
-            invalidatesTags: ['User']
+            invalidatesTags: ['User', 'Pools']
         }),
         getAllPools: builder.query({
             query: () => ({

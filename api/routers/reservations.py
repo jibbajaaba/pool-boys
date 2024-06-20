@@ -64,7 +64,7 @@ def reservation_delete(
 ):
     if not user:
         raise HTTPException(
-            status_code=404, detail="You are not authorized"
+            status_code=401, detail="You are not authorized"
         )
     return {
         "success": reservation_queries.delete_reservation(
@@ -93,7 +93,7 @@ def get_reservations_by_pool(
     print("CONTENT:", reservations)
     if not user:
         raise HTTPException(
-            status_code=404, detail="You are not authorized"
+            status_code=401, detail="You are not authorized"
         )
     if not reservations:
         raise HTTPException(

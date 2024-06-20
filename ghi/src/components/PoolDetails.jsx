@@ -1,13 +1,26 @@
 import { useGetAllAmenitiesQuery, useGetAllReservationsByPoolIdQuery, useGetPoolDetailsQuery, useDeleteReservationMutation } from '../app/apiSlice';
 import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import '../App.css';
 
 const PoolDetails = () => {
   const params = useParams();
   const { data: pool, isLoading, error } = useGetPoolDetailsQuery(params.pool_id);
-  const { data: reservations, isLoading: resLoading, error: resError, refetch } = useGetAllReservationsByPoolIdQuery(params.pool_id);
+  const { data: reservationsData, isLoading: resLoading, error: resError, refetch } = useGetAllReservationsByPoolIdQuery(params.pool_id);
   const { data: allAmenities, isLoading: amLoading, error: amError } = useGetAllAmenitiesQuery();
   const [deleteReservation] = useDeleteReservationMutation();
+  
+  const [reservations, setReservations] = useState([]);
+
+  useEffect(() => {
+    if (reservationsData) {
+      setReservations(reservationsData);
+    }
+  }, [reservationsData]);
+
+  if (reservationsData === null) {
+    return "No Reservations made";
+  }
 
   if (reservations === null) {
     return "No Reservations made";
@@ -24,7 +37,7 @@ const PoolDetails = () => {
   const handleDeleteReservation = async (reservationId) => {
     try {
       await deleteReservation(reservationId).unwrap();
-      refetch();
+      setReservations(prevReservations => prevReservations.filter(reservation => reservation.id !== reservationId));
       alert('Reservation deleted successfully!');
     } catch (err) {
       console.error('Failed to delete reservation:', err);
