@@ -56,7 +56,7 @@ const UpdatePoolForm = () => {
         });
     };
 
- const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Submitting form data:', formData);
 
@@ -104,7 +104,7 @@ const UpdatePoolForm = () => {
             </div>
             <div className="mb-4">
                 <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description:</label>
-                <textarea
+                <input
                     name="description"
                     id="description"
                     value={formData.description}

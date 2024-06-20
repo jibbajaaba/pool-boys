@@ -95,9 +95,6 @@ def get_reservations_by_pool(
         raise HTTPException(
             status_code=401, detail="You are not authorized"
         )
-    if not reservations:
-        raise HTTPException(
-            status_code=404,
-            detail="No reservations found for this pool"
-            )
+    if reservations is None:
+        reservations = []
     return reservations
