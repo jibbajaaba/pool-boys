@@ -8,8 +8,15 @@ import '../App.css'
 const Home = () => {
     const [imagesLoaded, setImagesLoaded] = useState(false)
     const images = [
-        'https://imageio.forbes.com/specials-images/imageserve/61014af0dd6a96c2285f098e/0x0.jpg?format=jpg&crop=2560,1440,x0,y346,safe&height=900&width=1600&fit=bounds',
-        'https://img.delicious.com.au/DAsUqhzz/del/2018/05/laucala-island-laucala-fiji-79624-2.jpg',
+        'https://media.cntraveller.com/photos/646b250470a21205c2817f04/master/w_2580%2Cc_limit/Amanruya%2C%2520Turkey%2520-%2520Main%2520Swimming%2520Pool_27493-may23-pr.jpeg',
+        'https://media.cntraveller.com/photos/63e4e2250b3ae3affb02f633/master/w_2580%2Cc_limit/DC_Villa_19-spa-feb%252023-pr-global.jpg',
+        'https://media.cntraveller.com/photos/642417da2f39eb0cd7d373fe/master/w_2580%2Cc_limit/marrakech-resort-overview4-MO-Marrakech-mar23-pr.jpg',
+        'https://media.cntraveller.com/photos/611bebf322be3ca7e5c009eb/master/w_2580%2Cc_limit/shangri-la-hotel-at-the-shard-london-sky-pool-london-nov19-pr.jpg',
+        'https://media.cntraveller.com/photos/665da8e290360c3b8f04857a/master/w_2580%2Cc_limit/13%2520-%2520Water%2520On%2520%2520Water%2520Pool%2520and%2520T%2520Beach-Grand%2520Hotel%2520Tremezzo-may24-pr.jpeg',
+        'https://media.cntraveller.com/photos/611be9a16ab96bf3ecf1ef41/master/w_2580%2Cc_limit/infinity_pool_miramontiboutiquehotel_southtyrol_italy-miramonti-jan20-pr.jpg',
+        'https://media.cntraveller.com/photos/611bebf0f902cc2d167b4145/master/w_2580%2Cc_limit/Marina-Bay-Sands-2-Traveller-9Jul13-PR_b.jpg',
+        'https://media.cntraveller.com/photos/611bebe9628f4910ed102143/master/w_2580%2Cc_limit/joali-maldives-dec18-pr1.jpg',
+        'https://media.cntraveller.com/photos/611bebecc15cf5da489ecd71/master/w_2580%2Cc_limit/Laucala-Fiji-pool-conde-nast-traveller-30may14-pr.jpg',
         // Add more image URLs here
     ]
 
