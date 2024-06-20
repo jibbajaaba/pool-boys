@@ -13,7 +13,7 @@ export default function SignUpForm() {
     const [centralOfficeCode, setCentralOfficeCode] = useState('');
     const [lineNumber, setLineNumber] = useState('');
     const [age, setAge] = useState('');
-    const [signup, { isLoading, error }] = useSignupUserMutation();
+    const [signup, { isLoading }] = useSignupUserMutation();
     const navigate = useNavigate();
 
     /**
@@ -34,7 +34,10 @@ export default function SignUpForm() {
             }).unwrap();
             navigate('/pools/create');
         } catch (error) {
-            console.error('Failed to signup:', error);
+            if (error.data && error.data.message) {
+            } else {
+                alert('User already exists. Please choose a different username.');
+            }
         }
     }
 

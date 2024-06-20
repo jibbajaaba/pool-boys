@@ -5,7 +5,14 @@ export default defineConfig({
     plugins: [react()],
     resolve: {
         alias: {
-            'slick-carousel': 'node_modules/slick-carousel',
+            'slick-carousel': 'slick-carousel',
+        },
+    },
+    server: {
+        host: true,
+        strictPort: true,
+        watch: {
+            usePolling: true,
         },
     },
 });
