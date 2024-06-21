@@ -15,3 +15,7 @@ Worked on finishing user and authentication. Got them working properly.  Also wo
 ### 6/7/24
 
 Worked on getting reservations completed and did some error catching. will be working on testing next class and looking to get redux setup over the weekend with the team.
+
+### 6/21/24
+
+worked on fixing more issues and testing the website. fixed things like making certain form inputs required and fixing errors. Did work on getting stuff together for te readme file also and hoping to get that done this weekend so come Monday is just about submitting the project and maybe planning additional features we want to implement or build out.
