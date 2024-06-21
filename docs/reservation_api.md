@@ -58,7 +58,7 @@
 * Headers:
   * Authorization: Bearer token
 
-* Response: A reservations
+* Response: A reservation object
 * Response shape (JSON):
     ```json
       {
@@ -101,7 +101,7 @@
 * Headers:
   * Authorization: Bearer token
 
-* Response: A list of reservations
+* Response: A list of reservations by pool id
 * Response shape (JSON):
     ```json
       [

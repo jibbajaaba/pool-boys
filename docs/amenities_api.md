@@ -1,25 +1,25 @@
 ### Get list of amenities
 
-* Endpoint path: /api/pools
+* Endpoint path: /api/amenities
 * Endpoint method: GET
 
 * Headers:
   * Authorization: Bearer token
 
-* Response: A list of Pools
+* Response: A list of amenities
 * Response shape (JSON):
     ```json
       [
         {
-          "id": 0,
-          "name": "string"
+          "id": int,
+          "name": str
         }
       ]
     ```
 
 ### Get One amenity
 
-* Endpoint path: /api/pools/<id>
+* Endpoint path: /api/amenities/<id>
 * Endpoint method: GET
 
 * Headers:
@@ -32,11 +32,11 @@
         }
     ```
 
-* Response: A single pool instance
+* Response: A single amenity
 * Response shape (JSON):
     ```json
       {
-        "id": 0,
-        "name": "string"
+        "id": int,
+        "name": str
       }
     ```

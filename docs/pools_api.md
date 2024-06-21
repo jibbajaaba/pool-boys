@@ -44,7 +44,7 @@
         }
     ```
 
-* Response: An indication of success or failure
+* Response: An object of a pool
 * Response shape (JSON):
     ```json
           {
@@ -80,7 +80,7 @@
         }
     ```
 
-* Response: An indication of success or failure
+* Response: An object of a pool
 * Response shape (JSON):
     ```json
       {
@@ -166,13 +166,13 @@
     ```json
       [
         {
-          "id": 1,
-          "poolowner_id": 1,
-          "picture_url": "string",
-          "address": "string",
-          "description": "string",
-          "hourly_rate": 0,
-          "number_guests": 0
+          "id": int,
+          "poolowner_id": int,
+          "picture_url": str,
+          "address": str,
+          "description": str,
+          "hourly_rate": int,
+          "number_guests": int
         },
       ]
     ```
