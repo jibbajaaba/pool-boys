@@ -8,15 +8,15 @@ const Footer = () => {
             <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
                 <p className="text-lg">&copy; 2024 PoolBoys. All rights reserved.</p>
                 <div className="flex space-x-4 mt-4 md:mt-0">
-                    <NavLink to={{ pathname: "https://www.instagram.com" }} target="_blank">
+                    <a href="https://www.instagram.com">
                         <FaInstagram className="w-8 h-8 hover:text-primary transition duration-300" />
-                    </NavLink>
-                    <NavLink to={{ pathname: "https://www.facebook.com" }} target="_blank">
+                    </a>
+                    <a href="https://www.facebook.com">
                         <FaFacebook className="w-8 h-8 hover:text-primary transition duration-300" />
-                    </NavLink>
-                    <NavLink to={{ pathname: "https://www.twitter.com" }} target="_blank">
+                    </a>
+                    <a href="https://www.twitter.com">
                         <FaTwitter className="w-8 h-8 hover:text-primary transition duration-300" />
-                    </NavLink>
+                    </a>
                 </div>
             </div>
         </footer>

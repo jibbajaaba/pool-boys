@@ -9,7 +9,7 @@ const PoolDetails = () => {
   const { data: reservationsData, isLoading: resLoading, error: resError, refetch } = useGetAllReservationsByPoolIdQuery(params.pool_id);
   const { data: allAmenities, isLoading: amLoading, error: amError } = useGetAllAmenitiesQuery();
   const [deleteReservation] = useDeleteReservationMutation();
-  
+
   const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
@@ -32,11 +32,12 @@ const PoolDetails = () => {
   if (error) return <p className="text-center py-10 text-red-500">Error Loading Pools: {error.message}</p>;
   if (resLoading) return <p className="text-center py-10">Loading reservations...</p>;
   if (amLoading) return <p className="text-center py-10">Loading amenities...</p>;
-  if (amError) return <p className="text-center py-10 text-green-700">Error Loading Amenities: {error.message}</p>;
+  if (amError) return <p className="text-center py-10 text-green-700">Error Loading Amenities: {amError.message}</p>;
 
   const handleDeleteReservation = async (reservationId) => {
     try {
       await deleteReservation(reservationId).unwrap();
+      refetch();
       setReservations(prevReservations => prevReservations.filter(reservation => reservation.id !== reservationId));
       alert('Reservation deleted successfully!');
     } catch (err) {
@@ -53,12 +54,12 @@ const PoolDetails = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
-        paddingTop: "6rem", // Add padding at the top to show the full image
+        paddingTop: "6rem",
       }}
     >
       <div className="max-w-5xl bg-white p-6 rounded-lg shadow-md w-full">
         <div className="image-container mb-6">
-          <img src={pool?.picture_url} alt="Pool" className="w-full h-64 object-cover rounded-lg" /> {/* Ensure consistent image size */}
+          <img src={pool?.picture_url} alt="Pool" className="w-full h-64 object-cover rounded-lg" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="pool-details mb-6">
