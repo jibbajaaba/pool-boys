@@ -54,7 +54,7 @@ const PoolDetails = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
-        paddingTop: "6rem", // Add padding at the top to show the full image
+        paddingTop: "6rem", 
       }}
     >
       <div className="max-w-5xl bg-white p-6 rounded-lg shadow-md w-full">
