@@ -1,6 +1,7 @@
-import { useGetAllAmenitiesQuery, useGetAllReservationsByPoolIdQuery, useGetPoolDetailsQuery, useDeleteReservationMutation } from '../app/apiSlice';
+import { useGetAllAmenitiesQuery, useGetAllReservationsByPoolIdQuery, useGetPoolDetailsQuery, useDeleteReservationMutation, useCreateReservationMutation } from '../app/apiSlice';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import MyCalendar from './MyCalendar';
 import '../App.css';
 
 const PoolDetails = () => {
@@ -9,6 +10,7 @@ const PoolDetails = () => {
   const { data: reservationsData, isLoading: resLoading, error: resError, refetch } = useGetAllReservationsByPoolIdQuery(params.pool_id);
   const { data: allAmenities, isLoading: amLoading, error: amError } = useGetAllAmenitiesQuery();
   const [deleteReservation] = useDeleteReservationMutation();
+  const [createReservation] = useCreateReservationMutation();
 
   const [reservations, setReservations] = useState([]);
 
@@ -43,6 +45,17 @@ const PoolDetails = () => {
     } catch (err) {
       console.error('Failed to delete reservation:', err);
       alert('Failed to delete reservation');
+    }
+  };
+
+  const handleCalendarReserve = async (newReservation) => {
+    try {
+      await createReservation({ ...newReservation, pool_id: params.pool_id }).unwrap();
+      refetch();
+      alert('Reservation created successfully!');
+    } catch (err) {
+      console.error('Failed to create reservation:', err);
+      alert('Failed to create reservation');
     }
   };
 
@@ -105,6 +118,10 @@ const PoolDetails = () => {
             ) : (
               <p className="text-gray-700">No reservations yet.</p>
             )}
+            <MyCalendar 
+              reservations={reservations} 
+              onReserve={handleCalendarReserve} 
+            />
           </div>
         </div>
       </div>
