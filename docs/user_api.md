@@ -1,37 +1,54 @@
-### Get list of pools
+### Signup a user
 
 * Endpoint path: /api/signup
-* Endpoint method: GET
+* Endpoint method: POST
 
 * Headers:
   * Authorization: Bearer token
 
 * Request shape (JSON):
     ```json
-    {
-        "email": string,
-        "first_name": string,
-        "last_name": stirng,
-        "address": string,
-        "password": string,
-        "password_confirmation": string,
-        "avatar": url_picture,
-        "description": text,
-    }
+        {
+        "username": str,
+        "password": str,
+        "first_name": str,
+        "last_name": str,
+        "email": str,
+        "phone_number": str,
+        "age": 0
+        }
     ```
 
-* Response: A list of Pools
+* Response: A logged in User
 * Response shape (JSON):
     ```json
-    {
+        {
         "id": int,
-        "email": string,
-        "first_name": string,
-        "last_name": stirng,
-        "address": string,
-        "password": string,
-        "password_confirmation": string,
-        "avatar": url_picture,
-        "description": text,
-    }
+        "username": str
+        }
+    ```
+
+### Signin a user
+
+* Endpoint path: /api/signin
+* Endpoint method: POST
+
+* Headers:
+  * Authorization: Bearer token
+
+* Request shape (JSON):
+    ```json
+        {
+        "username": str,
+        "password": str,
+        }
+    ```
+
+* Response: A logged in User
+* Response shape (JSON):
+    ```json
+        {
+        "id": int,
+        "username": str
+        }
     ```

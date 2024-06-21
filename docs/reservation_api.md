@@ -58,14 +58,59 @@
 * Headers:
   * Authorization: Bearer token
 
-* Response: A list of reservations
+* Response: A reservations
 * Response shape (JSON):
     ```json
       {
-        "id": 0,
-        "start_time": "2024-06-21T15:30:26.403Z",
-        "end_time": "2024-06-21T15:30:26.403Z",
-        "pool_id": 0,
-        "user_id": 0
+        "id": int,
+        "start_time": date/time,
+        "end_time": date/time,
+        "pool_id": int,
+        "user_id": int
       }
+    ```
+
+### Delete a pool
+
+* Endpoint path: /api/reservation/<id>
+* Endpoint method: DELETE
+
+* Headers:
+  * Authorization: Bearer token
+
+* Request shape (JSON):
+  ```json
+    {
+      "id": int
+    }
+  ```
+
+* Response: An indication of success or failure
+* Response shape (JSON):
+    ```json
+      {
+        "success": boolean,
+      }
+    ```
+
+### Get list of reservations by pool id
+
+* Endpoint path: /api/pools/<id>/reservations
+* Endpoint method: GET
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: A list of reservations
+* Response shape (JSON):
+    ```json
+      [
+        {
+          "id": int,
+          "start_time": date/time,
+          "end_time": date/time,
+          "pool_id": int,
+          "user_id": int
+        }
+      ]
     ```
