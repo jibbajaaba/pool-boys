@@ -9,7 +9,7 @@ const PoolDetails = () => {
   const { data: reservationsData, isLoading: resLoading, error: resError, refetch } = useGetAllReservationsByPoolIdQuery(params.pool_id);
   const { data: allAmenities, isLoading: amLoading, error: amError } = useGetAllAmenitiesQuery();
   const [deleteReservation] = useDeleteReservationMutation();
-  
+
   const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
@@ -54,12 +54,12 @@ const PoolDetails = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
-        paddingTop: "6rem", 
+        paddingTop: "6rem",
       }}
     >
       <div className="max-w-5xl bg-white p-6 rounded-lg shadow-md w-full">
         <div className="image-container mb-6">
-          <img src={pool?.picture_url} alt="Pool" className="w-full h-64 object-cover rounded-lg" /> {/* Ensure consistent image size */}
+          <img src={pool?.picture_url} alt="Pool" className="w-full h-64 object-cover rounded-lg" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="pool-details mb-6">
@@ -113,4 +113,3 @@ const PoolDetails = () => {
 };
 
 export default PoolDetails;
-
