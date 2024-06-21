@@ -1,7 +1,9 @@
+import React, { useState, useEffect } from 'react';
 import { useGetAllAmenitiesQuery, useGetAllReservationsByPoolIdQuery, useGetPoolDetailsQuery, useDeleteReservationMutation, useCreateReservationMutation } from '../app/apiSlice';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import MyCalendar from './MyCalendar';
+import DateTimePicker from 'react-datetime-picker';
+import 'react-datetime-picker/dist/DateTimePicker.css';
+import 'react-calendar/dist/Calendar.css';
 import '../App.css';
 
 const PoolDetails = () => {
@@ -13,6 +15,7 @@ const PoolDetails = () => {
   const [createReservation] = useCreateReservationMutation();
 
   const [reservations, setReservations] = useState([]);
+  const [newReservation, setNewReservation] = useState({ start_time: new Date(), end_time: new Date() });
 
   useEffect(() => {
     if (reservationsData) {
@@ -48,14 +51,30 @@ const PoolDetails = () => {
     }
   };
 
-  const handleCalendarReserve = async (newReservation) => {
-    try {
-      await createReservation({ ...newReservation, pool_id: params.pool_id }).unwrap();
-      refetch();
-      alert('Reservation created successfully!');
-    } catch (err) {
-      console.error('Failed to create reservation:', err);
-      alert('Failed to create reservation');
+  const handleReservationSubmit = async (e) => {
+    e.preventDefault();
+
+    const newStartTime = new Date(newReservation.start_time).getTime();
+    const newEndTime = new Date(newReservation.end_time).getTime();
+
+    const overlapping = reservations.some(reservation => {
+      const resStartTime = new Date(reservation.start_time).getTime();
+      const resEndTime = new Date(reservation.end_time).getTime();
+      return (newStartTime < resEndTime && newEndTime > resStartTime);
+    });
+
+    if (overlapping) {
+      alert('The selected time range overlaps with an existing reservation.');
+    } else {
+      try {
+        await createReservation({ pool_id: params.pool_id, ...newReservation }).unwrap();
+        refetch();
+        alert('Reservation created successfully!');
+        setNewReservation({ start_time: new Date(), end_time: new Date() });
+      } catch (err) {
+        console.error('Failed to create reservation:', err);
+        alert('Failed to create reservation');
+      }
     }
   };
 
@@ -118,10 +137,30 @@ const PoolDetails = () => {
             ) : (
               <p className="text-gray-700">No reservations yet.</p>
             )}
-            <MyCalendar 
-              reservations={reservations} 
-              onReserve={handleCalendarReserve} 
-            />
+            <form onSubmit={handleReservationSubmit}>
+              <div className="mb-4">
+                <label htmlFor="start_time" className="block text-sm font-medium text-gray-700">Start Time</label>
+                <DateTimePicker
+                  value={newReservation.start_time}
+                  onChange={(date) => setNewReservation(prevState => ({ ...prevState, start_time: date }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="end_time" className="block text-sm font-medium text-gray-700">End Time</label>
+                <DateTimePicker
+                  value={newReservation.end_time}
+                  onChange={(date) => setNewReservation(prevState => ({ ...prevState, end_time: date }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full py-2 px-4 bg-primary text-white font-semibold rounded-md shadow hover:bg-hippie focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition duration-300"
+              >
+                Reserve
+              </button>
+            </form>
           </div>
         </div>
       </div>
