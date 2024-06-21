@@ -79,9 +79,17 @@ const UpdatePoolForm = () => {
     if (amenitiesError) return <div>Error loading amenities: {amenitiesError.message}</div>;
 
     return (
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white shadow-md rounded mt-32">
+        <form
+            onSubmit={handleSubmit}
+            className="max-w-md mx-auto p-6 bg-white shadow-md rounded mt-32"
+        >
             <div className="mb-4">
-                <label htmlFor="picture_url" className="block text-sm font-medium text-gray-700">Picture URL:</label>
+                <label
+                    htmlFor="picture_url"
+                    className="block text-sm font-medium text-gray-700"
+                >
+                    Picture URL:
+                </label>
                 <input
                     type="text"
                     name="picture_url"
@@ -92,7 +100,12 @@ const UpdatePoolForm = () => {
                 />
             </div>
             <div className="mb-4">
-                <label htmlFor="address" className="block text-sm font-medium text-gray-700">City & State:</label>
+                <label
+                    htmlFor="address"
+                    className="block text-sm font-medium text-gray-700"
+                >
+                    City & State:
+                </label>
                 <input
                     type="text"
                     name="address"
@@ -103,7 +116,12 @@ const UpdatePoolForm = () => {
                 />
             </div>
             <div className="mb-4">
-                <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description & Address:</label>
+                <label
+                    htmlFor="description"
+                    className="block text-sm font-medium text-gray-700"
+                >
+                    Description & Address:
+                </label>
                 <input
                     name="description"
                     id="description"
@@ -113,42 +131,64 @@ const UpdatePoolForm = () => {
                 />
             </div>
             <div className="mb-4">
-                <label htmlFor="hourly_rate" className="block text-sm font-medium text-gray-700">Hourly Rate:</label>
+                <label
+                    htmlFor="hourly_rate"
+                    className="block text-sm font-medium text-gray-700"
+                >
+                    Hourly Rate:
+                </label>
                 <input
                     type="number"
                     name="hourly_rate"
                     id="hourly_rate"
+                    min={1}
                     value={formData.hourly_rate}
                     onChange={handleChange}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                 />
             </div>
             <div className="mb-4">
-                <label htmlFor="number_guests" className="block text-sm font-medium text-gray-700">Number of Guests:</label>
+                <label
+                    htmlFor="number_guests"
+                    className="block text-sm font-medium text-gray-700"
+                >
+                    Number of Guests:
+                </label>
                 <input
                     type="number"
                     name="number_guests"
                     id="number_guests"
+                    min={1}
                     value={formData.number_guests}
                     onChange={handleChange}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                 />
             </div>
             <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">Amenities:</label>
-                {amenities && amenities.map((amenity) => (
-                    <div key={amenity.id} className="flex items-center mb-2">
-                        <input
-                            type="checkbox"
-                            name="amenities_ids"
-                            value={amenity.id}
-                            checked={formData.amenities_ids.includes(amenity.id)}
-                            onChange={handleAmenitiesChange}
-                            className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
-                        />
-                        <span className="ml-2 text-gray-700">{amenity.name}</span>
-                    </div>
-                ))}
+                <label className="block text-sm font-medium text-gray-700">
+                    Amenities:
+                </label>
+                {amenities &&
+                    amenities.map((amenity) => (
+                        <div
+                            key={amenity.id}
+                            className="flex items-center mb-2"
+                        >
+                            <input
+                                type="checkbox"
+                                name="amenities_ids"
+                                value={amenity.id}
+                                checked={formData.amenities_ids.includes(
+                                    amenity.id
+                                )}
+                                onChange={handleAmenitiesChange}
+                                className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+                            />
+                            <span className="ml-2 text-gray-700">
+                                {amenity.name}
+                            </span>
+                        </div>
+                    ))}
             </div>
             <button
                 type="submit"
@@ -157,7 +197,7 @@ const UpdatePoolForm = () => {
                 Update Pool
             </button>
         </form>
-    );
+    )
 };
 
 export default UpdatePoolForm;
