@@ -42,7 +42,9 @@ def fake_try_get_jwt_user_data():
 
 def test_pool_details():
     app.dependency_overrides[PoolQueries] = FakePoolQueries
-    app.dependency_overrides[try_get_jwt_user_data] = fake_try_get_jwt_user_data
+    app.dependency_overrides[
+        try_get_jwt_user_data
+        ] = fake_try_get_jwt_user_data
     app.dependency_overrides[PoolAmenitiesQueries] = FakePoolAmenitiesQueries
 
     res = client.get("/api/pools/5")
