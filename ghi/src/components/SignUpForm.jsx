@@ -163,6 +163,7 @@ export default function SignUpForm() {
                         name="age"
                         id="age"
                         value={age}
+                        min={18}
                         onChange={(e) => setAge(e.target.value)}
                         placeholder="Enter Age"
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
