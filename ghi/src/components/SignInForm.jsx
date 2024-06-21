@@ -17,7 +17,10 @@ export default function SignInForm() {
             }).unwrap();
             navigate('/profile');
         } catch (error) {
-            console.error('Failed to signin:', error);
+            if (error.data && error.data.message){
+            } else {
+                alert('incorrect credentials')
+            }
         }
     }
 
