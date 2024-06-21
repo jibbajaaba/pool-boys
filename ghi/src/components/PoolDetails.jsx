@@ -32,11 +32,12 @@ const PoolDetails = () => {
   if (error) return <p className="text-center py-10 text-red-500">Error Loading Pools: {error.message}</p>;
   if (resLoading) return <p className="text-center py-10">Loading reservations...</p>;
   if (amLoading) return <p className="text-center py-10">Loading amenities...</p>;
-  if (amError) return <p className="text-center py-10 text-green-700">Error Loading Amenities: {error.message}</p>;
+  if (amError) return <p className="text-center py-10 text-green-700">Error Loading Amenities: {amError.message}</p>;
 
   const handleDeleteReservation = async (reservationId) => {
     try {
       await deleteReservation(reservationId).unwrap();
+      refetch();
       setReservations(prevReservations => prevReservations.filter(reservation => reservation.id !== reservationId));
       alert('Reservation deleted successfully!');
     } catch (err) {
@@ -112,3 +113,4 @@ const PoolDetails = () => {
 };
 
 export default PoolDetails;
+
