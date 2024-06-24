@@ -14,7 +14,7 @@ from queries.user_queries import (
 )
 
 from utils.exceptions import UserDatabaseException
-from models.users import UserRequest, UserResponse
+from models.users import UserRequest, UserResponse, UserLogin, UserDetail
 
 from utils.authentication import (
     try_get_jwt_user_data,
@@ -43,7 +43,7 @@ async def signup(
 
     # Create the user in the database
     try:
-        user = queries.create_user(new_user.username, hashed_password)
+        user = queries.create_user(new_user, hashed_password)
     except UserDatabaseException as e:
         print(e)
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
@@ -70,7 +70,7 @@ async def signup(
 
 @router.post("/signin")
 async def signin(
-    user_request: UserRequest,
+    user_request: UserLogin,
     request: Request,
     response: Response,
     queries: UserQueries = Depends(),
@@ -116,7 +116,8 @@ async def signin(
 @router.get("/authenticate")
 async def authenticate(
     user: UserResponse = Depends(try_get_jwt_user_data),
-) -> UserResponse:
+    queries: UserQueries = Depends(),
+) -> UserDetail | None:
     """
     This function returns the user if the user is logged in.
 
@@ -128,11 +129,11 @@ async def authenticate(
     This can be used in your frontend to determine if a user
     is logged in or not
     """
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Not logged in"
-        )
-    return user
+    if user is None:
+        return None
+
+    user_details = queries.get_by_id(user.id)
+    return user_details
 
 
 @router.delete("/signout")
