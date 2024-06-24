@@ -45,10 +45,11 @@ PoolBoys - Pool rental website to help pool owners connect with people who want 
 
 1. Clone the repository to your computer
 2. CD into the new project directory
-3. Run `docker volume create database_volume`
-4. Run `docker volume create pg-admin`
-5. Run `docker compose build`
-6. Run `docker compose up`
+3. create the .env file as show below in "Creating your .env file"
+4. Run `docker volume create database_volume`
+5. Run `docker volume create pg-admin`
+6. Run `docker compose build`
+7. Run `docker compose up`
 
 ### Creating your .env file
 
