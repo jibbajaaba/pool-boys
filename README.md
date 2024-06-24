@@ -1,156 +1,68 @@
-# Module3 Project Gamma
+# PoolBoys
 
-## Team Members
 * Hasan Hamdan
 * Cosimo Blodgett
 * James Skinner
 * Mark McTague
 
-## Getting started
+PoolBoys - Pool rental website to help pool owners connect with people who want to rent a pool and cool off.
 
-You have a project repository, now what? The next section
-lists all of the deliverables that are due at the end of the
-week. Below is some guidance for getting started on the
-tasks for this week.
+## Design
 
-## Install Extensions
+* [Wireframe](/docs/mvp_diagram.png)
+* [Database Model](/docs/datamodels.md)
+* API end points
+    * [pool api](/docs/pools_api.md)
+    * [amenities api](/docs/amenities_api.md)
+    * [reservations api](/docs/reservation_api.md)
+    * [user api](/docs/user_api.md)
+* FastAPI documentation can be found once project initialized by using URL: <http://localhost:8000/docs#/>
 
--   Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
--   Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
+## Intended Market
 
-## Deliverables
+ Pool-Boys is the platform designed specifically for pool owners and property owners with multiple rental units. This is not intended for large corporate rental companies or other businesses. This is for home owners or smaller rental property owners who want to maximize their income or make additional income from their pool.
 
--   [X] Wire-frame diagrams
--   [X] API documentation
--   [ ] Project is deployed to Caprover (BE, DB) & GitLab-pages (FE)
--   [X] GitLab issue board is setup and in use (or project management tool of choice)
--   [ ] Journals
+ Pool-Boys: Turn your unused pool into a money-maker. Whether you have one backyard oasis or manage multiple pools, Pool-Boys helps you unlock their earning potential. Share your beautiful space with others when it's not in use and start generating extra income with ease.
+##### It's perfect for:
+* Homeowners with a pool: Rent out your pool during weekdays, weekends, or whenever you're not using it.
+* Property managers: Maximize income on properties with pools by offering them to the community.
+* Anyone with an underutilized pool: Transform your pool into a profitable asset with minimal effort.
 
-## Project layout
+## Functionality
 
-The layout of the project is just like all of the projects
-you did with `docker-compose` in module #2. You will create
-a directory in the root of the repository for each service
-that you add to your project just like those previous
-projects were setup.
+* People who want to rent out their pool (pool owners) can come to our site to create an account and add their pool or pools to their profile.
+    * Currently there is no user experience for renting out the pool for this iteration
+* The home page details what we are and how we can help you earn additional money.
+* Signup will give a user access to the rest of the website and it's features which you must be logged in to access
+* Profile page shows the users information, a list of their pool or pools and a way to reserve their own pools to block off days from others reserving it.
+* Click a pool in the profile page will take you to a pool detail page. This shows the pool information, and a reservation table of currently made reservations.
+* Click the update button in the Profile page to update a pools information
+* Click the delete button to delete a pool
+* The Create pool button in the Nav bar will allow a user to create a pool
+* There are also social media links in the footer
 
-### Directories
+## Project Initialization
 
-Several directories have been added to your project. The
-directories `docs` and `journals` are places for you and
-your team-mates to, respectively, put any documentation
-about your project that you create and to put your
-project-journal entries. See the _README.md_ file in each
-directory for more info.
+1. Clone the repository to your computer
+2. CD into the new project directory
+3. create the .env file as show below in "Creating your .env file"
+4. Run `docker volume create database_volume`
+5. Run `docker volume create pg-admin`
+6. Run `docker compose build`
+7. Run `docker compose up`
 
-The other directories, `ghi` and `api`, are services, that
-you can start building off of.
+### Creating your .env file
 
-Inside of `ghi` is a minimal React app that has an "under construction" page.
-This app is written using the [Vite](https://vitejs.dev/) bundler. The example
-code is also using [jsdoc](https://jsdoc.app/) to provide type hints for
-JavaScript. You are not required to use JSDoc yourself, and you will be removing
-these examples and providing your own code for `App.jsx`
+In order for the project to work properly a .env file must be created in the root directory of the project. due to the sensitive nature of the information in the .env file it is included in the .gitignore. You must include your own passwords and signing keys.
 
-Inside of `api` is a minimal FastAPI application.
-"Where are all the files?" you might ask? Well, the
-`main.py` file is the whole thing, and go take look inside
-of it... There's not even much in there..., hmm? That is
-FastAPI, we'll learn more about it in the coming days. Can
-you figure out what this little web-application does even
-though you haven't learned about FastAPI yet?
-
-Also in `api` is a directory for your migrations.
-If you choose to use PostgreSQL, then you'll want to use
-migrations to control your database. Unlike Django, where
-migrations were automatically created for you, you'll write
-yours by hand using DDL. Don't worry about not knowing what
-DDL means; we have you covered. There's a sample migration
-in there that creates two tables so you can see what they
-look like.
-
-The Dockerfile and Dockerfile.dev run your migrations
-for you automatically.
-
-### Other files
-
-The following project files have been created as a minimal
-starting point. Please follow the guidance for each one for
-a most successful project.
-
--   `docker-compose.yaml`: there isn't much in here, just a
-    **really** simple UI and FastAPI service. Add services
-    (like a database) to this file as you did with previous
-    projects in module #2.
--   `.gitlab-ci.yml`: This is your "ci/cd" file where you will
-    configure automated unit tests, code quality checks, and
-    the building and deployment of your production system.
-    Currently, all it does is deploy an "under construction"
-    page to your production UI on GitLab and a sample backend
-    to CapRover. We will learn much more about this file.
--   `.gitignore`: This is a file that prevents unwanted files
-    from getting added to your repository, files like
-    `pyc` files, `__pycache__`, etc. We've set it up so that
-    it has a good default configuration for Python projects.
--   `.env.sample`: This file is a template to copy when
-    creating environment variables for your team. Create a
-    copy called `.env` and put your own passwords in here
-    without fear of it being committed to git (see `.env`
-    listed in `.gitignore`). You can also put team related
-    environment variables in here, things like api and signing
-    keys that shouldn't be committed; these should be
-    duplicated in your deployed environments.
-
-### Installing python dependencies locally
-
-In order for VSCode's built in code completion and intelligence to
-work correctly, it needs the dependencies from the requirements.txt file
-installed. We do this inside docker, but not in the workspace.
-
-So we need to create a virtual environment and pip install the requirements.
-
-From inside the `api` folder:
-
-```bash
-python -m venv .venv
-```
-
-Then activate the virtual environment
-
-```bash
-source .venv/bin/activate
-```
-
-And finally install the dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Then make sure the venv is selected in VSCode by checking the lower right of the
-VSCode status bar
-
-### Setup GitLab repo/project
-
--   make sure this project is in a group. If it isn't, stop
-    now and move it to a GitLab group
--   remove the fork relationship: In GitLab go to:
-
-    Settings -> General -> Advanced -> Remove fork relationship
-
--   add these GitLab CI/CD variables:
-    -   PUBLIC_URL : this is your gitlab pages URL
-    -   VITE_APP_API_HOST: enter "blank" for now
-
-#### Your GitLab pages URL
-
-You can't find this in GitLab until after you've done a deploy
-but you can figure it out yourself from your GitLab project URL.
-
-If this is your project URL
-
-https://gitlab.com/GROUP_NAME/PROJECT_NAME
-
-then your GitLab pages URL will be
-
-https://GROUP_NAME.gitlab.io/PROJECT_NAME
+> POSTGRES_DB="db_name"
+>
+> POSTGRES_USER={"your user name"}
+>
+> POSTGRES_PASSWORD={"your password for db"}
+>
+> SIGNING_KEY={"your signing key goes here"}
+>
+> PGADMIN_EMAIL={"pg admin login email goes here"}
+>
+> PGADMIN_PASSWORD={"pg admin password goes here"}

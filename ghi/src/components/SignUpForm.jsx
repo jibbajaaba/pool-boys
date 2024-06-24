@@ -1,4 +1,3 @@
-// @ts-check
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSignupUserMutation } from '../app/apiSlice';
@@ -45,20 +44,29 @@ export default function SignUpForm() {
         <div
             className="min-h-screen w-full flex items-center justify-center p-6"
             style={{
-                backgroundImage: "url('https://img.freepik.com/premium-photo/surface-green-swimming-pool-texture-background_55716-2249.jpg?w=1380')",
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center center"
+                backgroundImage:
+                    "url('https://img.freepik.com/premium-photo/surface-green-swimming-pool-texture-background_55716-2249.jpg?w=1380')",
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center center',
             }}
         >
-            <form onSubmit={handleFormSubmit} className="max-w-md mx-auto p-6 bg-white shadow-md rounded">
-
+            <form
+                onSubmit={handleFormSubmit}
+                className="max-w-md mx-auto p-6 bg-white shadow-md rounded"
+            >
                 <div className="mb-4">
-                    <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
+                    <label
+                        htmlFor="username"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Username
+                    </label>
                     <input
                         type="text"
                         name="username"
                         id="username"
+                        required
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder="Enter Username"
@@ -67,11 +75,17 @@ export default function SignUpForm() {
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+                    <label
+                        htmlFor="password"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Password
+                    </label>
                     <input
                         type="password"
                         name="password"
                         id="password"
+                        required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Enter Password"
@@ -80,11 +94,17 @@ export default function SignUpForm() {
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">First Name</label>
+                    <label
+                        htmlFor="first_name"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        First Name
+                    </label>
                     <input
                         type="text"
                         name="first_name"
                         id="first_name"
+                        required
                         value={first_name}
                         onChange={(e) => setFirstName(e.target.value)}
                         placeholder="Enter First Name"
@@ -93,10 +113,16 @@ export default function SignUpForm() {
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="last_name" className="block text-sm font-medium text-gray-700">Last Name</label>
+                    <label
+                        htmlFor="last_name"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Last Name
+                    </label>
                     <input
                         type="text"
                         name="last_name"
+                        required
                         id="last_name"
                         value={last_name}
                         onChange={(e) => setLastName(e.target.value)}
@@ -106,11 +132,17 @@ export default function SignUpForm() {
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                    <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Email
+                    </label>
                     <input
                         type="email"
                         name="email"
                         id="email"
+                        required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter Email"
@@ -119,12 +151,18 @@ export default function SignUpForm() {
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <label
+                        htmlFor="phone_number"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Phone Number
+                    </label>
                     <div className="flex space-x-2">
                         <input
                             type="tel"
                             name="areaCode"
                             id="areaCode"
+                            required
                             value={areaCode}
                             onChange={(e) => setAreaCode(e.target.value)}
                             placeholder="123"
@@ -136,8 +174,11 @@ export default function SignUpForm() {
                             type="tel"
                             name="centralOfficeCode"
                             id="centralOfficeCode"
+                            required
                             value={centralOfficeCode}
-                            onChange={(e) => setCentralOfficeCode(e.target.value)}
+                            onChange={(e) =>
+                                setCentralOfficeCode(e.target.value)
+                            }
                             placeholder="456"
                             pattern="[0-9]{3}"
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
@@ -147,6 +188,7 @@ export default function SignUpForm() {
                             type="tel"
                             name="lineNumber"
                             id="lineNumber"
+                            required
                             value={lineNumber}
                             onChange={(e) => setLineNumber(e.target.value)}
                             placeholder="7890"
@@ -157,11 +199,17 @@ export default function SignUpForm() {
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="age" className="block text-sm font-medium text-gray-700">Age</label>
+                    <label
+                        htmlFor="age"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Age
+                    </label>
                     <input
                         type="number"
                         name="age"
                         id="age"
+                        required
                         value={age}
                         min={18}
                         onChange={(e) => setAge(e.target.value)}
@@ -179,5 +227,5 @@ export default function SignUpForm() {
                 </button>
             </form>
         </div>
-    );
+    )
 }

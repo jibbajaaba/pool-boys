@@ -90,7 +90,6 @@ def get_reservations_by_pool(
     reservations = reservation_queries.get_reservation_by_pool_id(
         pool_id=pool_id
         )
-    print("CONTENT:", reservations)
     if not user:
         raise HTTPException(
             status_code=401, detail="You are not authorized"
