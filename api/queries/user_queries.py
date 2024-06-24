@@ -23,8 +23,6 @@ class UserQueries:
 
     Can be dependency injected into a route like so
 
-    def my_route(userQueries: UserQueries = Depends()):
-        # Here you can call any of the functions to query the DB
     """
 
     def get_by_username(self, username: str) -> Optional[UserWithPw]:

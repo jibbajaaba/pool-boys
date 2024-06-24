@@ -32,12 +32,10 @@ def fake_try_get_jwt_user_data():
 
 
 def test_create_reservations():
-    # Arrange
     app.dependency_overrides[ReservationQueries] = FakeReservationQueries
     app.dependency_overrides[
         try_get_jwt_user_data
         ] = fake_try_get_jwt_user_data
-    # Act
     body = {
         "pool_id": 1,
         "start_time": "2024-06-10T19:28:26.185Z",
@@ -45,7 +43,6 @@ def test_create_reservations():
     }
     result = client.post("/api/reservations", json=body)
     data = result.json()
-    # Assert
     assert result.status_code == 200
     assert data == {
         "id": 1,

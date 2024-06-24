@@ -17,7 +17,6 @@ const Home = () => {
         'https://media.cntraveller.com/photos/611bebf0f902cc2d167b4145/master/w_2580%2Cc_limit/Marina-Bay-Sands-2-Traveller-9Jul13-PR_b.jpg',
         'https://media.cntraveller.com/photos/611bebe9628f4910ed102143/master/w_2580%2Cc_limit/joali-maldives-dec18-pr1.jpg',
         'https://media.cntraveller.com/photos/611bebecc15cf5da489ecd71/master/w_2580%2Cc_limit/Laucala-Fiji-pool-conde-nast-traveller-30may14-pr.jpg',
-        // Add more image URLs here
     ]
 
     useEffect(() => {
