@@ -16,6 +16,18 @@ Worked on finishing user and authentication. Got them working properly.  Also wo
 
 Worked on getting reservations completed and did some error catching. will be working on testing next class and looking to get redux setup over the weekend with the team.
 
+### 6/17/24
+
+Was able to get more done on functionality on the website. CSS still needs to be done but everything seems to be coming together. I do need to keep up with journals for this last week. Must get into the habit of documenting everything I do
+
+### 6/18/24
+
+Got started on CSS today. Got two pages finished which should be enough to copy and paste a lot of the Tailwind code that we created. Didn't feel like I did mush today though. Need to learn more CSS though and practice with it. I hope to get more time practice but i'm feeling slow to learn and understand things working in a group.
+
 ### 6/21/24
 
 worked on fixing more issues and testing the website. fixed things like making certain form inputs required and fixing errors. Did work on getting stuff together for te readme file also and hoping to get that done this weekend so come Monday is just about submitting the project and maybe planning additional features we want to implement or build out.
+
+### 6/22/24
+
+Worked on getting the readme done. Need to work on the instructions to initialize the project but it should be good. We are also going to look at Cosimos reservation calender that he created on the 21st to see if we want to merge it with main when we submit the project. Other then that updated documents we needed, such as wire frame and API end points. Hoping Monday we will just need to settle on a few things.
