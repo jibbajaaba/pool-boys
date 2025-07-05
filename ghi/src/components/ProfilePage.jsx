@@ -1,50 +1,66 @@
-import React, { useState } from 'react';
-import { useGetAllPoolsbyUsernameQuery, useDeletePoolMutation, useGetUserQuery, useCreateReservationMutation } from '../app/apiSlice';
-import { useNavigate, Link } from 'react-router-dom';
-import "../App.css";
+import React, { useState } from 'react'
+import {
+    useGetAllPoolsbyUsernameQuery,
+    useDeletePoolMutation,
+    useGetUserQuery,
+    useCreateReservationMutation,
+} from '../app/apiSlice'
+import { useNavigate, Link } from 'react-router-dom'
+import '../App.css'
 
 const ProfilePage = () => {
-    const { data: user, isLoading: userLoading } = useGetUserQuery();
-    const { data: pools, isLoading, error } = useGetAllPoolsbyUsernameQuery();
-    const [deletePool] = useDeletePoolMutation();
-    const [createReservation] = useCreateReservationMutation();
-    const navigate = useNavigate();
-    const [newReservation, setNewReservation] = useState({ pool_id: '', start_time: '', end_time: '' });
+    const { data: user, isLoading: userLoading } = useGetUserQuery()
+    const { data: pools, isLoading, error } = useGetAllPoolsbyUsernameQuery()
+    const [deletePool] = useDeletePoolMutation()
+    const [createReservation] = useCreateReservationMutation()
+    const navigate = useNavigate()
+    const [newReservation, setNewReservation] = useState({
+        pool_id: '',
+        start_time: '',
+        end_time: '',
+    })
 
-    if (userLoading) return <div className="text-center py-10">Loading user...</div>;
-    if (isLoading) return <div className="text-center py-10">Loading pools...</div>;
-    if (error) return <div className="text-center py-10 text-red-500">Error loading pools: {error.message}</div>;
+    if (userLoading)
+        return <div className="text-center py-10">Loading user...</div>
+    if (isLoading)
+        return <div className="text-center py-10">Loading pools...</div>
+    if (error)
+        return (
+            <div className="text-center py-10 text-red-500">
+                Error loading pools: {error.message}
+            </div>
+        )
 
     const handleDelete = async (poolId) => {
         try {
-            await deletePool(poolId).unwrap();
-            alert('Pool deleted successfully!');
+            await deletePool(poolId).unwrap()
+            alert('Pool deleted successfully!')
         } catch (err) {
-            console.error('Failed to delete pool:', err);
-            alert('Failed to delete pool');
+            console.error('Failed to delete pool:', err)
+            alert('Failed to delete pool')
         }
-    };
+    }
 
     const handleUpdate = (poolId) => {
-        navigate(`/pools/update/${poolId}`);
-    };
+        navigate(`/pools/update/${poolId}`)
+    }
 
     const handleReservationChange = (e) => {
-        const { name, value } = e.target;
-        setNewReservation(prevState => ({ ...prevState, [name]: value }));
-    };
+        const { name, value } = e.target
+        setNewReservation((prevState) => ({ ...prevState, [name]: value }))
+    }
 
     const handleReservationSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         try {
-            await createReservation(newReservation).unwrap();
-            alert('Reservation created successfully!');
-            setNewReservation({ pool_id: '', start_time: '', end_time: '' });
+            await createReservation(newReservation).unwrap()
+            alert('Reservation created successfully!')
+            setNewReservation({ pool_id: '', start_time: '', end_time: '' })
         } catch (err) {
-            console.error('Failed to create reservation:', err);
-            alert('Failed to create reservation');
+            console.error('Failed to create reservation:', err)
+            alert('Failed to create reservation')
         }
-    };
+    }
 
     return (
         <div
@@ -57,7 +73,7 @@ const ProfilePage = () => {
                 backgroundPosition: 'center center',
             }}
         >
-            <div className="pt-28 text-wrap bg-lagoon min-h-screen p-6 size-full mx-40 my-auto">
+            <div className="pt-28 text-wrap bg-lagoon bg-opacity-50 min-h-screen p-6 size-full my-auto">
                 {user && (
                     <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md mb-6">
                         <h1 className="text-3xl font-bold text-copper mb-6">
@@ -83,10 +99,11 @@ const ProfilePage = () => {
                     </div>
                 )}
 
-                <h2 className="text-2xl font-bold text-copper mb-4">
-                    Pool List
-                </h2>
-                <div className="max-w-5xl mx-auto mb-6">
+
+                <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md mb-6">
+                    <h2 className="text-2xl font-bold text-copper mb-4">
+                        Pool List
+                    </h2>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {pools && pools.length > 0 ? (
                             pools.map((pool) => (
@@ -213,6 +230,6 @@ const ProfilePage = () => {
             </div>
         </div>
     )
-};
+}
 
-export default ProfilePage;
+export default ProfilePage
